@@ -10,21 +10,24 @@ public class Game {
         Pending
     }
 
-    private final int _id;
+    private int _id;
 
-    private final String _name;
-    private final String _price;
-    private final String _gender;
-    private final String _releaseDate;
-    private final String _estimatedHours;
-    private final String _totalsHours;
+    private String _name;
+    private String _price;
+    private String _gender;
+    private String _releaseDate;
+    private String _estimatedHours;
+    private String _totalsHours;
+    private String _state;
 
-    private final URL _cover;
+    private URL _cover;
 
-    private GameStatus _state;
+    public Game() {
+
+    }
 
     public Game(int id, String name, String price, String gender, String releaseDate, String estimatedHours,
-                String totalsHours, URL cover) {
+                String totalsHours, URL cover, String state) {
 
         _id = id;
         _name = name;
@@ -34,7 +37,20 @@ public class Game {
         _estimatedHours = estimatedHours;
         _totalsHours = totalsHours;
         _cover = cover;
-        _state = GameStatus.Pending;
+        _state = state;
+    }
+
+    public Game(String name, String price, String gender, String releaseDate, String estimatedHours,
+                String totalsHours, URL cover, String state) {
+
+        _name = name;
+        _price = price;
+        _gender = gender;
+        _releaseDate = releaseDate;
+        _estimatedHours = estimatedHours;
+        _totalsHours = totalsHours;
+        _cover = cover;
+        _state = state;
     }
 
     //Getters
@@ -78,7 +94,7 @@ public class Game {
         return _cover;
     }
 
-    public GameStatus get_state() {
+    public String get_state() {
 
         return _state;
     }
