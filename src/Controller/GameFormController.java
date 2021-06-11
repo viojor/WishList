@@ -96,7 +96,7 @@ public class GameFormController implements ActionListener {
         if (coverImage != null) {
 
             _viewGameForm.CoverImage.setIcon(new ImageIcon(new ImageIcon(coverImage).getImage()
-                    .getScaledInstance(150, 150, Image.SCALE_DEFAULT)));
+                    .getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
         }
     }
 }

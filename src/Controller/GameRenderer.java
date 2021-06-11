@@ -11,7 +11,7 @@ public class GameRenderer extends JLabel implements ListCellRenderer<Game> {
                                                   boolean cellHasFocus) {
 
         ImageIcon coverIcon = new ImageIcon(new ImageIcon(game.get_cover()).getImage()
-                .getScaledInstance(80, 80, Image.SCALE_DEFAULT));
+                .getScaledInstance(80, 100, Image.SCALE_DEFAULT));
         String name = game.get_name();
 
         setIcon(coverIcon);
