@@ -1,7 +1,5 @@
 package View;
 
-import Controller.GameFormController;
-
 import javax.swing.*;
 
 public class GameForm extends JFrame {
@@ -21,24 +19,16 @@ public class GameForm extends JFrame {
     public JLabel ReleaseDateL;
     public JLabel EstimatedHoursL;
     public JLabel TotalHoursL;
-    public JPanel CoverImageP;
     public JPanel CoverP;
     public JPanel MainP;
+    public JLabel CoverImage;
 
     public GameForm(String title) {
 
         super(title);
 
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(MainP);
         this.pack();
-    }
-
-    public static void main(String[] args) {
-
-        GameForm gf = new GameForm("Home");
-        GameFormController controller = new GameFormController(gf);
-
-        gf.setVisible(true);
     }
 }

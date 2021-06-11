@@ -3,6 +3,7 @@ package Model;
 import MySQL.DBConnector;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -44,7 +45,7 @@ public class GameDAO {
 
             Connection connection = DBConnector.getConnection();
 
-            String cover = null;//elementToInsert.get_cover().toString();
+            String cover = elementToInsert.get_cover();
             String name = elementToInsert.get_name();
             String price = elementToInsert.get_price();
             String gender = elementToInsert.get_gender();
@@ -53,11 +54,24 @@ public class GameDAO {
             String totalHours = elementToInsert.get_totalsHours();
             String state = elementToInsert.get_state();
 
-            Statement st = connection.createStatement();
+            /*Statement st = connection.createStatement();
             st.executeUpdate("INSERT INTO GAMES (cover, name, price, gender, release_date, estimated_hours, " +
                     "total_hours, state) " +
                     "VALUES ('" + cover + "', '" + name + "', '" + price + "', '" + gender + "', '" + releaseDate +
-                    "', '" + estimatedHours + "', '" + totalHours + "', '" + state + "')");
+                    "', '" + estimatedHours + "', '" + totalHours + "', '" + state + "')");*/
+
+            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
+                    "release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            pstmt.setString(1, cover);
+            pstmt.setString(2, name);
+            pstmt.setString(3, price);
+            pstmt.setString(4, gender);
+            pstmt.setString(5, releaseDate);
+            pstmt.setString(6, estimatedHours);
+            pstmt.setString(7, totalHours);
+            pstmt.setString(8, state);
+
+            pstmt.execute();
 
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
@@ -73,7 +87,7 @@ public class GameDAO {
             Connection connection = DBConnector.getConnection();
 
             int id = upgradedElement.get_id();
-            String cover = null;//upgradedElement.get_cover().toString();
+            String cover = upgradedElement.get_cover();
             String name = upgradedElement.get_name();
             String price = upgradedElement.get_price();
             String gender = upgradedElement.get_gender();
@@ -112,15 +126,15 @@ public class GameDAO {
         }
     }
 
-    public List<Game> getPendingGames() {
+    public List<Game> getGamesByStatus(String statusOfGame) {
 
-        List<Game> pendingGamesList = new LinkedList<>();
+        List<Game> gameList = new LinkedList<>();
         try {
 
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE state = 'Pending'");
+            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE state = '" + statusOfGame + "'");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -133,27 +147,27 @@ public class GameDAO {
                 String totalHours = rs.getString("total_hours");
                 String state = rs.getString("state");
 
-                Game gameSelected = new Game(id, name, price, gender, releaseDate, estimatedHours, totalHours, null, state);
-                pendingGamesList.add(gameSelected);
+                Game gameSelected = new Game(id, name, price, gender, releaseDate, estimatedHours, totalHours, cover, state);
+                gameList.add(gameSelected);
             }
 
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting pending games from 'GAMES': " + e);
+            System.out.println("Error getting games with status " + statusOfGame + " from 'GAMES': " + e);
         }
-        return pendingGamesList;
+        return gameList;
     }
 
-    public List<Game> getPurchasedGames() {
+    public Game getGameById(int gameId) {
 
-        List<Game> purchasedGamesList = new LinkedList<>();
+        Game gameWithId = new Game();
         try {
 
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE state = 'Purchased'");
+            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE id = " + gameId + "");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -166,15 +180,37 @@ public class GameDAO {
                 String totalHours = rs.getString("total_hours");
                 String state = rs.getString("state");
 
-                Game gameSelected = new Game(id, name, price, gender, releaseDate, estimatedHours, totalHours, null, state);
-                purchasedGamesList.add(gameSelected);
+                gameWithId = new Game(id, name, price, gender, releaseDate, estimatedHours, totalHours, cover, state);
             }
 
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting purchased games from 'GAMES': " + e);
+            System.out.println("Error getting the game with the id " + gameId + " from 'GAMES': " + e);
         }
-        return purchasedGamesList;
+        return gameWithId;
+    }
+
+    public int getCurrentMaxId() {
+
+        int maxId = 0;
+        try {
+
+            Connection connection = DBConnector.getConnection();
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT id FROM GAMES");
+            while (rs.next()) {
+                if (rs.getInt(1) > maxId) {
+
+                    maxId = rs.getInt(1);
+                }
+            }
+            rs.close();
+        } catch (SQLException e) {
+
+            System.out.println("Error getting the max id from 'GAMES': " + e);
+        }
+        return maxId;
     }
 }

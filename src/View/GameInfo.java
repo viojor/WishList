@@ -2,21 +2,31 @@ package View;
 
 import javax.swing.*;
 
-public class GameInfo {
-    private JLabel NameL;
-    private JLabel NameValueL;
-    private JLabel GenderL;
-    private JLabel GenderValueL;
-    private JLabel PriceL;
-    private JLabel PriceValueL;
-    private JLabel ReleaseDateL;
-    private JLabel ReleaseDateValueL;
-    private JLabel EstimatedHoursL;
-    private JLabel EstimatedHoursValueL;
-    private JLabel TotalHoursL;
-    private JLabel TotalHoursValueL;
-    private JPanel CoverP;
-    private JPanel ImageP;
-    private JPanel GameDataP;
-    private JPanel MainP;
+public class GameInfo extends JFrame {
+
+    public JLabel nameL;
+    public JLabel nameValueL;
+    public JLabel genderL;
+    public JLabel genderValueL;
+    public JLabel priceL;
+    public JLabel priceValueL;
+    public JLabel releaseDateL;
+    public JLabel releaseDateValueL;
+    public JLabel estimatedHoursL;
+    public JLabel estimatedHoursValueL;
+    public JLabel totalHoursL;
+    public JLabel totalHoursValueL;
+    public JPanel coverP;
+    public JPanel gameDataP;
+    public JPanel mainP;
+    public JLabel coverImage;
+
+    public GameInfo(String title) {
+
+        super(title);
+
+        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.setContentPane(mainP);
+        this.pack();
+    }
 }

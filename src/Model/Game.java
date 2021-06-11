@@ -1,7 +1,5 @@
 package Model;
 
-import java.net.URL;
-
 public class Game {
 
     public enum GameStatus {
@@ -19,15 +17,14 @@ public class Game {
     private String _estimatedHours;
     private String _totalsHours;
     private String _state;
-
-    private URL _cover;
+    private String _cover;
 
     public Game() {
 
     }
 
     public Game(int id, String name, String price, String gender, String releaseDate, String estimatedHours,
-                String totalsHours, URL cover, String state) {
+                String totalsHours, String cover, String state) {
 
         _id = id;
         _name = name;
@@ -41,7 +38,7 @@ public class Game {
     }
 
     public Game(String name, String price, String gender, String releaseDate, String estimatedHours,
-                String totalsHours, URL cover, String state) {
+                String totalsHours, String cover, String state) {
 
         _name = name;
         _price = price;
@@ -89,7 +86,7 @@ public class Game {
         return _totalsHours;
     }
 
-    public URL get_cover() {
+    public String get_cover() {
 
         return _cover;
     }
@@ -97,5 +94,11 @@ public class Game {
     public String get_state() {
 
         return _state;
+    }
+
+    //toString
+    public String toString() {
+
+        return _name;
     }
 }

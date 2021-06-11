@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="View.GameInfo">
-  <grid id="27dc6" binding="MainP" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+  <grid id="27dc6" binding="mainP" layout-manager="GridLayoutManager" row-count="2" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
     <margin top="0" left="0" bottom="0" right="0"/>
     <constraints>
       <xy x="20" y="20" width="500" height="400"/>
@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <grid id="bfb2e" binding="CoverP" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="bfb2e" binding="coverP" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -16,18 +16,17 @@
         <properties/>
         <border type="none"/>
         <children>
-          <grid id="36434" binding="ImageP" layout-manager="GridLayoutManager" row-count="1" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
-            <margin top="0" left="0" bottom="0" right="0"/>
+          <component id="51f78" class="javax.swing.JLabel" binding="coverImage">
             <constraints>
-              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
-            <properties/>
-            <border type="none"/>
-            <children/>
-          </grid>
+            <properties>
+              <text value=""/>
+            </properties>
+          </component>
         </children>
       </grid>
-      <grid id="db501" binding="GameDataP" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+      <grid id="db501" binding="gameDataP" layout-manager="GridLayoutManager" row-count="6" column-count="2" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
         <margin top="0" left="0" bottom="0" right="0"/>
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="2" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
@@ -35,7 +34,7 @@
         <properties/>
         <border type="none"/>
         <children>
-          <component id="a914b" class="javax.swing.JLabel" binding="NameL">
+          <component id="a914b" class="javax.swing.JLabel" binding="nameL">
             <constraints>
               <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -43,7 +42,7 @@
               <text value="Name"/>
             </properties>
           </component>
-          <component id="fe98a" class="javax.swing.JLabel" binding="NameValueL">
+          <component id="fe98a" class="javax.swing.JLabel" binding="nameValueL">
             <constraints>
               <grid row="0" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -51,7 +50,7 @@
               <text value="Name Value"/>
             </properties>
           </component>
-          <component id="c9e84" class="javax.swing.JLabel" binding="GenderL">
+          <component id="c9e84" class="javax.swing.JLabel" binding="genderL">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -59,7 +58,7 @@
               <text value="Gender"/>
             </properties>
           </component>
-          <component id="1ee85" class="javax.swing.JLabel" binding="GenderValueL">
+          <component id="1ee85" class="javax.swing.JLabel" binding="genderValueL">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -67,7 +66,7 @@
               <text value="Gender Value"/>
             </properties>
           </component>
-          <component id="3c30d" class="javax.swing.JLabel" binding="PriceL">
+          <component id="3c30d" class="javax.swing.JLabel" binding="priceL">
             <constraints>
               <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -75,7 +74,7 @@
               <text value="Price"/>
             </properties>
           </component>
-          <component id="9830b" class="javax.swing.JLabel" binding="PriceValueL">
+          <component id="9830b" class="javax.swing.JLabel" binding="priceValueL">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -83,7 +82,7 @@
               <text value="Price Value"/>
             </properties>
           </component>
-          <component id="ada45" class="javax.swing.JLabel" binding="ReleaseDateL">
+          <component id="ada45" class="javax.swing.JLabel" binding="releaseDateL">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -91,7 +90,7 @@
               <text value="Release Date"/>
             </properties>
           </component>
-          <component id="67ea7" class="javax.swing.JLabel" binding="ReleaseDateValueL">
+          <component id="67ea7" class="javax.swing.JLabel" binding="releaseDateValueL">
             <constraints>
               <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -99,7 +98,7 @@
               <text value="Release Date Value"/>
             </properties>
           </component>
-          <component id="cf725" class="javax.swing.JLabel" binding="EstimatedHoursL">
+          <component id="cf725" class="javax.swing.JLabel" binding="estimatedHoursL">
             <constraints>
               <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -107,7 +106,7 @@
               <text value="Estimated Hours"/>
             </properties>
           </component>
-          <component id="9cd5d" class="javax.swing.JLabel" binding="EstimatedHoursValueL">
+          <component id="9cd5d" class="javax.swing.JLabel" binding="estimatedHoursValueL">
             <constraints>
               <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -115,7 +114,7 @@
               <text value="Estimated Hours Value"/>
             </properties>
           </component>
-          <component id="ece9c" class="javax.swing.JLabel" binding="TotalHoursL">
+          <component id="ece9c" class="javax.swing.JLabel" binding="totalHoursL">
             <constraints>
               <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -123,7 +122,7 @@
               <text value="Total Hours"/>
             </properties>
           </component>
-          <component id="3bc9d" class="javax.swing.JLabel" binding="TotalHoursValueL">
+          <component id="3bc9d" class="javax.swing.JLabel" binding="totalHoursValueL">
             <constraints>
               <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
