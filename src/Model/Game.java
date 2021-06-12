@@ -1,5 +1,7 @@
 package Model;
 
+import java.util.Objects;
+
 public class Game {
 
     public enum GameStatus {
@@ -96,9 +98,40 @@ public class Game {
         return _state;
     }
 
+    //Setters
+    public void set_state(String _state) {
+
+        this._state = _state;
+    }
+
     //toString
     public String toString() {
 
         return _name;
+    }
+
+    //equals
+    public boolean equals(Object o) {
+
+        if (this == o) {
+
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+
+            return false;
+        }
+
+        Game game = (Game) o;
+        return _id == game._id && Objects.equals(_name, game._name) && Objects.equals(_price, game._price)
+                && Objects.equals(_gender, game._gender) && Objects.equals(_releaseDate, game._releaseDate)
+                && Objects.equals(_estimatedHours, game._estimatedHours) && Objects.equals(_totalsHours, game._totalsHours)
+                && Objects.equals(_state, game._state) && Objects.equals(_cover, game._cover);
+    }
+
+    //hashCode
+    public int hashCode() {
+
+        return Objects.hash(_id, _name, _price, _gender, _releaseDate, _estimatedHours, _totalsHours, _state, _cover);
     }
 }

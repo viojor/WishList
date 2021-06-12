@@ -20,6 +20,7 @@ public class GameInfo extends JFrame {
     public JPanel gameDataP;
     public JPanel mainP;
     public JLabel coverImage;
+    public JButton purchasedB;
 
     public GameInfo(String title) {
 

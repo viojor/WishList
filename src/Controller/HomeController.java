@@ -66,7 +66,7 @@ public class HomeController implements ChangeListener {
                 Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                 gi.setSize((int) screenSize.getWidth() / 2, (int) screenSize.getHeight() / 2);
 
-                GameInfoController gameInfoController = new GameInfoController(gi, selectedGameId);
+                GameInfoController gameInfoController = new GameInfoController(gi, selectedGameId, _jlistGamesModel);
                 gi.setVisible(true);
             }
 

@@ -54,12 +54,6 @@ public class GameDAO {
             String totalHours = elementToInsert.get_totalsHours();
             String state = elementToInsert.get_state();
 
-            /*Statement st = connection.createStatement();
-            st.executeUpdate("INSERT INTO GAMES (cover, name, price, gender, release_date, estimated_hours, " +
-                    "total_hours, state) " +
-                    "VALUES ('" + cover + "', '" + name + "', '" + price + "', '" + gender + "', '" + releaseDate +
-                    "', '" + estimatedHours + "', '" + totalHours + "', '" + state + "')");*/
-
             PreparedStatement pstmt = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
                     "release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             pstmt.setString(1, cover);
@@ -212,5 +206,22 @@ public class GameDAO {
             System.out.println("Error getting the max id from 'GAMES': " + e);
         }
         return maxId;
+    }
+
+    public void updateStateGame(int gameId) {
+
+        try {
+
+            Connection connection = DBConnector.getConnection();
+
+            Statement st = connection.createStatement();
+            //We can only change from Pending to Purchased
+            st.executeUpdate("UPDATE GAMES SET state = '" + Game.GameStatus.Purchased + "' WHERE id = " + gameId);
+
+            DBConnector.disconnectDB(connection);
+        } catch (SQLException e) {
+
+            System.out.println("Error updating the state of an element from 'GAMES': " + e);
+        }
     }
 }
