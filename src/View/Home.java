@@ -27,9 +27,10 @@ public class Home extends JFrame {
         Home home = new Home("Home");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        home.setSize((int) screenSize.getWidth() / 2, (int) screenSize.getHeight() / 2);
+        home.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
         
         HomeController controller = new HomeController(home);
+        controller.loadTab();
 
         home.setVisible(true);
     }

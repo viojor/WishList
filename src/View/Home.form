@@ -27,7 +27,7 @@
             <children>
               <scrollpane id="ac6bb" binding="pendingTab">
                 <constraints>
-                  <tabbedpane title="Pending"/>
+                  <tabbedpane title-resource-bundle="Strings" title-key="pendingTab"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -35,7 +35,7 @@
               </scrollpane>
               <scrollpane id="40a40" binding="purchasedTab">
                 <constraints>
-                  <tabbedpane title="Purchased"/>
+                  <tabbedpane title-resource-bundle="Strings" title-key="purchasedTab"/>
                 </constraints>
                 <properties/>
                 <border type="none"/>
@@ -50,9 +50,13 @@
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <text value="Add Game"/>
+          <text resource-bundle="Strings" key="add.game"/>
         </properties>
       </component>
     </children>
   </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor" id="ac6bb"/>
+    <suppress inspection="NoLabelFor" id="40a40"/>
+  </inspectionSuppressions>
 </form>

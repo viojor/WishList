@@ -15,21 +15,25 @@ import java.io.IOException;
 
 public class GameFormController implements ActionListener {
 
-    private GameForm _viewGameForm;
-    private GameDAO _gameDAO;
+    private final GameForm _viewGameForm;
+    private final GameDAO _gameDAO;
     private Game _gameModel;
-    private DefaultListModel<Game> _jListGameModel;
+    private DefaultListModel<Game> _defaultListGameModel;
 
     private String urlGameCover;
 
-    public GameFormController(GameForm viewGameForm, DefaultListModel<Game> jListGameModel) {
+    public GameFormController(GameForm viewGameForm) {
 
         _viewGameForm = viewGameForm;
         _gameDAO = new GameDAO();
-        _jListGameModel = jListGameModel;
 
         _viewGameForm.CreateB.addActionListener(this);
         _viewGameForm.CoverB.addActionListener(this);
+    }
+
+    public void setDefaultListModel(DefaultListModel<Game> defaultListModel){
+
+        _defaultListGameModel = defaultListModel;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -37,7 +41,7 @@ public class GameFormController implements ActionListener {
         if (e.getSource() == _viewGameForm.CreateB) {
 
             createGameWithInputs();
-            _jListGameModel.addElement(_gameModel);
+            _defaultListGameModel.addElement(_gameModel);
             _viewGameForm.dispose();
         } else if (e.getSource() == _viewGameForm.CoverB) {
 

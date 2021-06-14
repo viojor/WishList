@@ -10,8 +10,6 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.LinkedList;
@@ -22,10 +20,10 @@ public class HomeController implements ChangeListener {
     private static final String PENDING_TAB = "Pending";
     private static final String PURCHASED_TAB = "Purchased";
 
-    private Home _viewHome;
-    private GameDAO _gameDAO;
+    private final Home _viewHome;
+    private final GameDAO _gameDAO;
 
-    private DefaultListModel<Game> _jlistGamesModel;
+    private DefaultListModel<Game> _defaultListGamesModel;
 
     public HomeController(Home viewHome) {
 
@@ -33,58 +31,53 @@ public class HomeController implements ChangeListener {
         _gameDAO = new GameDAO();
 
         _viewHome.tabbedPanel.addChangeListener(this);
-        if (_viewHome.tabbedPanel.getSelectedIndex() != -1) {
-
-            loadTab();
-        }
-
-        _viewHome.addGameB.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-
-                openGameForm();
-            }
-        });
+        _viewHome.addGameB.addActionListener(e -> openGameForm());
     }
 
-    private void loadTab() {
+    public void loadTab() {
 
-        _jlistGamesModel = new DefaultListModel<>();
-        List<Game> gameList = getGamesList();
-        for (Game game : gameList) {
+        if (_viewHome.tabbedPanel.getSelectedIndex() != -1) {
 
-            _jlistGamesModel.addElement(game);
+            _defaultListGamesModel = new DefaultListModel<>();
+            List<Game> gameList = getGamesList();
+            for (Game game : gameList) {
+
+                _defaultListGamesModel.addElement(game);
+            }
+
+            JList<Game> gameJList = new JList<>(_defaultListGamesModel);
+            gameJList.setCellRenderer(new GameRenderer());
+            gameJList.addMouseListener(new MouseListener() {
+                public void mouseClicked(MouseEvent e) {
+
+                    GameInfo gi = new GameInfo("GameInfo");
+                    int selectedGameId = gameJList.getSelectedValue().get_id();
+
+                    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+                    gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+
+                    GameInfoController gameInfoController = new GameInfoController(gi, selectedGameId);
+                    gameInfoController.setDefaultListModel(_defaultListGamesModel);
+
+                    gi.setVisible(true);
+                }
+
+                public void mousePressed(MouseEvent e) {
+                }
+
+                public void mouseReleased(MouseEvent e) {
+                }
+
+                public void mouseEntered(MouseEvent e) {
+                }
+
+                public void mouseExited(MouseEvent e) {
+                }
+            });
+
+            JScrollPane jsp = (JScrollPane) _viewHome.tabbedPanel.getSelectedComponent();
+            jsp.setViewportView(gameJList);
         }
-
-        JList<Game> gameJList = new JList<>(_jlistGamesModel);
-        gameJList.setCellRenderer(new GameRenderer());
-        gameJList.addMouseListener(new MouseListener() {
-            public void mouseClicked(MouseEvent e) {
-
-                GameInfo gi = new GameInfo("GameInfo");
-                int selectedGameId = gameJList.getSelectedValue().get_id();
-
-                Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                gi.setSize((int) screenSize.getWidth() / 2, (int) screenSize.getHeight() / 2);
-
-                GameInfoController gameInfoController = new GameInfoController(gi, selectedGameId, _jlistGamesModel);
-                gi.setVisible(true);
-            }
-
-            public void mousePressed(MouseEvent e) {
-            }
-
-            public void mouseReleased(MouseEvent e) {
-            }
-
-            public void mouseEntered(MouseEvent e) {
-            }
-
-            public void mouseExited(MouseEvent e) {
-            }
-        });
-
-        JScrollPane jsp = (JScrollPane) _viewHome.tabbedPanel.getSelectedComponent();
-        jsp.setViewportView(gameJList);
     }
 
     private List<Game> getGamesList() {
@@ -120,9 +113,10 @@ public class HomeController implements ChangeListener {
         GameForm gf = new GameForm("AddGame");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        gf.setSize((int) screenSize.getWidth() / 2, (int) screenSize.getHeight() / 2);
+        gf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
 
-        GameFormController controller = new GameFormController(gf, _jlistGamesModel);
+        GameFormController controller = new GameFormController(gf);
+        controller.setDefaultListModel(_defaultListGamesModel);
 
         gf.setVisible(true);
     }

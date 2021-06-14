@@ -15,22 +15,26 @@ import java.io.IOException;
 
 public class GameInfoController implements ActionListener {
 
-    private GameInfo _gameInfoView;
-    private GameDAO _gameDAO;
-    private Game _gameModel;
-    private DefaultListModel<Game> _jListGameModel;
+    private final GameInfo _gameInfoView;
+    private final GameDAO _gameDAO;
+    private final Game _gameModel;
+    private DefaultListModel<Game> _defaultListModel;
 
-    public GameInfoController(GameInfo gameInfoView, int idGameToShow, DefaultListModel<Game> jListGameModel) {
+    public GameInfoController(GameInfo gameInfoView, int idGameToShow) {
 
         _gameInfoView = gameInfoView;
         _gameDAO = new GameDAO();
         _gameModel = _gameDAO.getGameById(idGameToShow);
-        _jListGameModel = jListGameModel;
 
         _gameInfoView.purchasedB.addActionListener(this);
 
         setGameInfoIntoView();
         setPurchasedButtonVisibility();
+    }
+
+    public void setDefaultListModel(DefaultListModel<Game> defaultListModel){
+
+        _defaultListModel = defaultListModel;
     }
 
     private void setGameInfoIntoView() {
@@ -79,13 +83,13 @@ public class GameInfoController implements ActionListener {
 
         if (e.getSource() == _gameInfoView.purchasedB) {
 
-            int defaultListModelElementIndx = _jListGameModel.indexOf(_gameModel);
+            int defaultListModelElementIndex = _defaultListModel.indexOf(_gameModel);
 
             _gameModel.set_state(Game.GameStatus.Purchased.toString());
             _gameDAO.updateStateGame(_gameModel.get_id());
 
             //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
-            _jListGameModel.remove(defaultListModelElementIndx);
+            _defaultListModel.remove(defaultListModelElementIndex);
 
             _gameInfoView.dispose();
         }

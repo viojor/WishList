@@ -54,18 +54,18 @@ public class GameDAO {
             String totalHours = elementToInsert.get_totalsHours();
             String state = elementToInsert.get_state();
 
-            PreparedStatement pstmt = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
                     "release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            pstmt.setString(1, cover);
-            pstmt.setString(2, name);
-            pstmt.setString(3, price);
-            pstmt.setString(4, gender);
-            pstmt.setString(5, releaseDate);
-            pstmt.setString(6, estimatedHours);
-            pstmt.setString(7, totalHours);
-            pstmt.setString(8, state);
+            preparedStatement.setString(1, cover);
+            preparedStatement.setString(2, name);
+            preparedStatement.setString(3, price);
+            preparedStatement.setString(4, gender);
+            preparedStatement.setString(5, releaseDate);
+            preparedStatement.setString(6, estimatedHours);
+            preparedStatement.setString(7, totalHours);
+            preparedStatement.setString(8, state);
 
-            pstmt.execute();
+            preparedStatement.execute();
 
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
