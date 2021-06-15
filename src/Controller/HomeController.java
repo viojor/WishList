@@ -75,6 +75,7 @@ public class HomeController implements ChangeListener {
                 }
             });
 
+            gameJList.setBackground(new Color(156, 143, 231));
             JScrollPane jsp = (JScrollPane) _viewHome.tabbedPanel.getSelectedComponent();
             jsp.setViewportView(gameJList);
         }

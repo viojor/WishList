@@ -3,6 +3,7 @@ package Controller;
 import Model.Game;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class GameRenderer extends JLabel implements ListCellRenderer<Game> {
@@ -16,6 +17,8 @@ public class GameRenderer extends JLabel implements ListCellRenderer<Game> {
 
         setIcon(coverIcon);
         setText(name);
+        setForeground(new Color(255, 255, 255));
+        setBorder(new EmptyBorder(5, 10, 5, 0));
 
         return this;
     }

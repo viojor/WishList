@@ -6,6 +6,8 @@ import View.GameForm;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,6 +78,13 @@ public class GameFormController implements ActionListener {
 
         String fileUrl = null;
         JFileChooser chooser = new JFileChooser();
+
+        String[] imageSuffixes = ImageIO.getReaderFileSuffixes();
+        for(String suffix : imageSuffixes){
+
+            FileFilter filter = new FileNameExtensionFilter(suffix + " files", suffix);
+            chooser.addChoosableFileFilter(filter);
+        }
 
         int returnVal = chooser.showOpenDialog(_viewGameForm);
         if (returnVal == JFileChooser.APPROVE_OPTION) {
