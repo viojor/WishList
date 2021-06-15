@@ -66,7 +66,7 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="c9e84" class="javax.swing.JLabel" binding="genderL">
+          <component id="c9e84" class="javax.swing.JLabel" binding="genreL">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -78,7 +78,7 @@
               <text resource-bundle="Strings" key="gender"/>
             </properties>
           </component>
-          <component id="1ee85" class="javax.swing.JLabel" binding="genderValueL">
+          <component id="1ee85" class="javax.swing.JLabel" binding="genreValueL">
             <constraints>
               <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>

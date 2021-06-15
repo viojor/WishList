@@ -34,18 +34,6 @@
               <foreground color="-1"/>
             </properties>
           </component>
-          <component id="dabb2" class="javax.swing.JTextField" binding="GenderTF">
-            <constraints>
-              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-6516761"/>
-              <font name="Comic Sans MS" size="14" style="0"/>
-              <foreground color="-1"/>
-            </properties>
-          </component>
           <component id="404f2" class="javax.swing.JTextField" binding="PriceTF">
             <constraints>
               <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
@@ -70,7 +58,7 @@
               <text resource-bundle="Strings" key="name"/>
             </properties>
           </component>
-          <component id="88a8b" class="javax.swing.JLabel" binding="GenderL">
+          <component id="88a8b" class="javax.swing.JLabel" binding="GenreL">
             <constraints>
               <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
             </constraints>
@@ -78,7 +66,7 @@
               <background color="-6516761"/>
               <font name="Comic Sans MS" size="14" style="0"/>
               <foreground color="-1"/>
-              <labelFor value="dabb2"/>
+              <labelFor value="fd7ab"/>
               <text resource-bundle="Strings" key="gender"/>
             </properties>
           </component>
@@ -94,18 +82,6 @@
               <text resource-bundle="Strings" key="price"/>
             </properties>
           </component>
-          <component id="d2766" class="javax.swing.JTextField" binding="ReleaseDateTF">
-            <constraints>
-              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
-                <preferred-size width="150" height="-1"/>
-              </grid>
-            </constraints>
-            <properties>
-              <background color="-6516761"/>
-              <font name="Comic Sans MS" size="14" style="0"/>
-              <foreground color="-1"/>
-            </properties>
-          </component>
           <component id="d6cf9" class="javax.swing.JLabel" binding="ReleaseDateL">
             <constraints>
               <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
@@ -114,7 +90,6 @@
               <background color="-6516761"/>
               <font name="Comic Sans MS" size="14" style="0"/>
               <foreground color="-1"/>
-              <labelFor value="d2766"/>
               <text resource-bundle="Strings" key="release.date"/>
             </properties>
           </component>
@@ -163,6 +138,25 @@
             <properties>
               <background color="-6516761"/>
               <editable value="true"/>
+              <font name="Comic Sans MS" size="14" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="fd7ab" class="javax.swing.JComboBox" binding="GenreCB">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="a5631" class="org.jdesktop.swingx.JXDatePicker" binding="ReleaseDateDP">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
               <font name="Comic Sans MS" size="14" style="0"/>
               <foreground color="-1"/>
             </properties>

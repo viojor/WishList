@@ -41,7 +41,7 @@ public class GameInfoController implements ActionListener {
 
         loadCoverInLabel();
         _gameInfoView.nameValueL.setText(_gameModel.get_name());
-        _gameInfoView.genderValueL.setText(_gameModel.get_gender());
+        _gameInfoView.genreValueL.setText(_gameModel.get_gender());
         _gameInfoView.priceValueL.setText(_gameModel.get_price());
         _gameInfoView.releaseDateValueL.setText(_gameModel.get_releaseDate());
         _gameInfoView.estimatedHoursValueL.setText(_gameModel.get_estimatedHours());

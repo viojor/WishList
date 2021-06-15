@@ -6,8 +6,8 @@ public class GameInfo extends JFrame {
 
     public JLabel nameL;
     public JLabel nameValueL;
-    public JLabel genderL;
-    public JLabel genderValueL;
+    public JLabel genreL;
+    public JLabel genreValueL;
     public JLabel priceL;
     public JLabel priceValueL;
     public JLabel releaseDateL;
