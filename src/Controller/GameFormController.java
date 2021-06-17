@@ -20,7 +20,7 @@ import java.util.Date;
 public class GameFormController implements ActionListener {
 
     private static final String[] GENRES_GAMES = {"Action", "Adventure", "Platform", "Shooter", "Fighting", "Beat 'em up",
-            "Survival Horror", "Visual Novel", "RPG", "Roguelikes", "Simulation", "Real-time strategy",
+            "Survival Horror", "Visual Novel", "RPG", "Roguelike", "Simulation", "Real-time strategy",
             "Turn-based strategy", "Sports", "MMO", "Other"};
     private static final String NO_ASSIGNED_GENRE = "No Assigned";
 
@@ -31,6 +31,8 @@ public class GameFormController implements ActionListener {
 
     private String genreSelected;
     private String urlGameCover;
+
+    private final GameFormValidation _formValidation;
 
     public GameFormController(GameForm viewGameForm) {
 
@@ -43,6 +45,8 @@ public class GameFormController implements ActionListener {
         DefaultComboBoxModel<String> genresGamesDefaultModel = new DefaultComboBoxModel<>(GENRES_GAMES);
         _viewGameForm.GenreCB.setModel(genresGamesDefaultModel);
         _viewGameForm.GenreCB.addActionListener(this);
+
+        _formValidation = new GameFormValidation();
     }
 
     public void setDefaultListModel(DefaultListModel<Game> defaultListModel){
@@ -53,10 +57,22 @@ public class GameFormController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == _viewGameForm.CreateB) {
+            if(_formValidation.isFieldNotEmpty(_viewGameForm.NameTF) & _formValidation.isFieldNotEmpty(_viewGameForm.EstimatedHoursTF) &
+                    _formValidation.isFieldNotEmpty(_viewGameForm.TotalHoursTF) & _formValidation.isFieldNotEmpty(_viewGameForm.PriceTF) &
+                    _formValidation.isFieldNotEmpty(_viewGameForm.ReleaseDateDP.getEditor()) && _formValidation.isFieldNumeric(_viewGameForm.EstimatedHoursTF) &
+                    _formValidation.isFieldNumeric(_viewGameForm.TotalHoursTF) & _formValidation.isFieldNumeric(_viewGameForm.PriceTF)){
 
-            createGameWithInputs();
-            _defaultListGameModel.addElement(_gameModel);
-            _viewGameForm.dispose();
+                createGameWithInputs();
+                _defaultListGameModel.addElement(_gameModel);
+                _viewGameForm.dispose();
+            }
+            else{
+
+                String errorMsg = _formValidation.getFinalErrorMsg();
+                _formValidation.resetFinalErrorMsg();
+
+                JOptionPane.showMessageDialog(null, errorMsg);
+            }
         } else if (e.getSource() == _viewGameForm.CoverB) {
 
             urlGameCover = getUrlCoverSelected();

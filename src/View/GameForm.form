@@ -157,6 +157,7 @@
             </constraints>
             <properties>
               <background color="-6516761"/>
+              <editable value="true"/>
               <font name="Comic Sans MS" size="14" style="0"/>
               <foreground color="-1"/>
             </properties>

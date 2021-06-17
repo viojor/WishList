@@ -30,6 +30,13 @@ public class GameForm extends JFrame {
 
         super(title);
 
+        NameTF.setName("Name");
+        PriceTF.setName("Price");
+        EstimatedHoursTF.setName("Estimated Hours");
+        TotalHoursTF.setName("Total Hours");
+        ReleaseDateDP.getEditor().setName("Release Date");
+        ReleaseDateDP.getEditor().setEditable(false);
+
         setColorJXDatePicker(ReleaseDateDP);
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
