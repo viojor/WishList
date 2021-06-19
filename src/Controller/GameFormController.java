@@ -23,6 +23,7 @@ public class GameFormController implements ActionListener {
             "Survival Horror", "Visual Novel", "RPG", "Roguelike", "Simulation", "Real-time strategy",
             "Turn-based strategy", "Sports", "MMO", "Other"};
     private static final String NO_ASSIGNED_GENRE = "No Assigned";
+    private static final String URL_IMAGE_NOT_AVAILABLE = "C:\\Cover_Not_Available.jpg";
 
     private final GameForm _viewGameForm;
     private final GameDAO _gameDAO;
@@ -106,6 +107,11 @@ public class GameFormController implements ActionListener {
 
         String estimatedHours = _viewGameForm.EstimatedHoursTF.getText();
         String totalHours = _viewGameForm.TotalHoursTF.getText();
+        if(urlGameCover == null){
+
+            urlGameCover = URL_IMAGE_NOT_AVAILABLE;
+            loadCoverInLabel();
+        }
         String cover = urlGameCover;
 
         _gameModel = new Game(id, name, price, gender, releaseDateFormatDDMMYYYY, estimatedHours, totalHours, cover, Game.GameStatus.Pending.toString());

@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class GameFormValidation {
 
-    private static final String ONLY_NUMBERS_REGEX = "[0-9]+[.]?[0-9]+";
+    private static final String ONLY_NUMBERS_REGEX = "[0-9]+([.][0-9]+)?";
     private static final String WHITESPACE_REGEX = "\\s+";
 
     private String final_error_msg;
