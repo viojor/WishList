@@ -1,0 +1,4 @@
+Manifest-Version: 1.0
+Main-Class: View.Home
+Class-Path: swingx-all-1.6.4.jar mysql-connector-java-8.0.25.jar
+
