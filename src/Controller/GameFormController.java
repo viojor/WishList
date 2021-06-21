@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Game;
 import Model.GameDAO;
+import Model.PurchasableItem;
 import View.GameForm;
 
 import javax.imageio.ImageIO;
@@ -114,7 +115,8 @@ public class GameFormController implements ActionListener {
         }
         String cover = urlGameCover;
 
-        _gameModel = new Game(id, name, price, gender, releaseDateFormatDDMMYYYY, estimatedHours, totalHours, cover, Game.GameStatus.Pending.toString());
+        _gameModel = new Game(id, name, price, gender, releaseDateFormatDDMMYYYY, estimatedHours, totalHours, cover,
+                PurchasableItem.ItemState.Pending.toString());
 
         addGameToDB();
     }

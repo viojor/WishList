@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Game;
 import Model.GameDAO;
+import Model.PurchasableItem;
 import View.GameInfo;
 
 import javax.imageio.ImageIO;
@@ -40,9 +41,9 @@ public class GameInfoController implements ActionListener {
     private void setGameInfoIntoView() {
 
         loadCoverInLabel();
-        _gameInfoView.nameValueL.setText(_gameModel.get_name());
+        _gameInfoView.nameValueL.setText(_gameModel.getName());
         _gameInfoView.genreValueL.setText(_gameModel.get_gender());
-        _gameInfoView.priceValueL.setText(_gameModel.get_price());
+        _gameInfoView.priceValueL.setText(_gameModel.getPrice());
         _gameInfoView.releaseDateValueL.setText(_gameModel.get_releaseDate());
         _gameInfoView.estimatedHoursValueL.setText(_gameModel.get_estimatedHours());
         _gameInfoView.totalHoursValueL.setText(_gameModel.get_totalsHours());
@@ -53,7 +54,7 @@ public class GameInfoController implements ActionListener {
         BufferedImage coverImage = null;
         try {
 
-            coverImage = ImageIO.read(new File(_gameModel.get_cover()));
+            coverImage = ImageIO.read(new File(_gameModel.getCover()));
         } catch (IOException e) {
 
             System.out.println("Error loading the cover on the label (GameInfo): " + e);
@@ -68,7 +69,7 @@ public class GameInfoController implements ActionListener {
 
     private void setPurchasedButtonVisibility() {
 
-        if (_gameModel.get_state().equals(Game.GameStatus.Purchased.toString())) {
+        if (_gameModel.getState().equals(PurchasableItem.ItemState.Purchased.toString())) {
 
             _gameInfoView.purchasedB.setVisible(false);
             _gameInfoView.purchasedB.setEnabled(false);
@@ -85,8 +86,8 @@ public class GameInfoController implements ActionListener {
 
             int defaultListModelElementIndex = _defaultListModel.indexOf(_gameModel);
 
-            _gameModel.set_state(Game.GameStatus.Purchased.toString());
-            _gameDAO.updateStateGame(_gameModel.get_id());
+            _gameModel.setState(PurchasableItem.ItemState.Purchased.toString());
+            _gameDAO.updateStateGame(_gameModel.getId());
 
             //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
             _defaultListModel.remove(defaultListModelElementIndex);

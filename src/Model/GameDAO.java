@@ -45,14 +45,14 @@ public class GameDAO {
 
             Connection connection = DBConnector.getConnection();
 
-            String cover = elementToInsert.get_cover();
-            String name = elementToInsert.get_name();
-            String price = elementToInsert.get_price();
+            String cover = elementToInsert.getCover();
+            String name = elementToInsert.getName();
+            String price = elementToInsert.getPrice();
             String gender = elementToInsert.get_gender();
             String releaseDate = elementToInsert.get_releaseDate();
             String estimatedHours = elementToInsert.get_estimatedHours();
             String totalHours = elementToInsert.get_totalsHours();
-            String state = elementToInsert.get_state();
+            String state = elementToInsert.getState();
 
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
                     "release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -80,15 +80,15 @@ public class GameDAO {
 
             Connection connection = DBConnector.getConnection();
 
-            int id = upgradedElement.get_id();
-            String cover = upgradedElement.get_cover();
-            String name = upgradedElement.get_name();
-            String price = upgradedElement.get_price();
+            int id = upgradedElement.getId();
+            String cover = upgradedElement.getCover();
+            String name = upgradedElement.getName();
+            String price = upgradedElement.getPrice();
             String gender = upgradedElement.get_gender();
             String releaseDate = upgradedElement.get_releaseDate();
             String estimatedHours = upgradedElement.get_estimatedHours();
             String totalHours = upgradedElement.get_totalsHours();
-            String state = upgradedElement.get_state();
+            String state = upgradedElement.getState();
 
             Statement st = connection.createStatement();
             st.executeUpdate("UPDATE GAMES " +
@@ -216,7 +216,7 @@ public class GameDAO {
 
             Statement st = connection.createStatement();
             //We can only change from Pending to Purchased
-            st.executeUpdate("UPDATE GAMES SET state = '" + Game.GameStatus.Purchased + "' WHERE id = " + gameId);
+            st.executeUpdate("UPDATE GAMES SET state = '" + PurchasableItem.ItemState.Purchased + "' WHERE id = " + gameId);
 
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {

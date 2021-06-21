@@ -2,6 +2,7 @@ package Controller;
 
 import Model.Game;
 import Model.GameDAO;
+import Model.PurchasableItem;
 import View.GameForm;
 import View.GameInfo;
 import View.Home;
@@ -51,7 +52,7 @@ public class HomeController implements ChangeListener {
                 public void mouseClicked(MouseEvent e) {
 
                     GameInfo gi = new GameInfo("GameInfo");
-                    int selectedGameId = gameJList.getSelectedValue().get_id();
+                    int selectedGameId = gameJList.getSelectedValue().getId();
 
                     Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
                     gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
@@ -96,12 +97,12 @@ public class HomeController implements ChangeListener {
 
     private List<Game> loadPendingGames() {
 
-        return _gameDAO.getGamesByStatus(Game.GameStatus.Pending.toString());
+        return _gameDAO.getGamesByStatus(PurchasableItem.ItemState.Pending.toString());
     }
 
     private List<Game> loadPurchasedGames() {
 
-        return _gameDAO.getGamesByStatus(Game.GameStatus.Purchased.toString());
+        return _gameDAO.getGamesByStatus(PurchasableItem.ItemState.Purchased.toString());
     }
 
     public void stateChanged(ChangeEvent e) {
