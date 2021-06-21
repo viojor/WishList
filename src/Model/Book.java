@@ -5,16 +5,16 @@ import java.util.Objects;
 public class Book extends PurchasableItem{
 
     private String _author;
-    private String _publicationDate;
-    private String _pagesNumber;
+    private int _pagesNumber;
     private String _ISBN;
+    private String _publicationDate;
 
     public Book(){
 
     }
 
-    public Book(int id, String name, String price, String state, String cover, String author, String publicationDate,
-                String pagesNumber, String ISBN){
+    public Book(int id, String name, String price, String state, String cover, String author, int pagesNumber,
+                String ISBN, String publicationDate){
 
         super._id = id;
         super._name = name;
@@ -23,13 +23,13 @@ public class Book extends PurchasableItem{
         super._cover = cover;
 
         _author = author;
-        _publicationDate = publicationDate;
         _pagesNumber = pagesNumber;
         _ISBN = ISBN;
+        _publicationDate = publicationDate;
     }
 
-    public Book(String name, String price, String state, String cover, String author, String publicationDate,
-                String pagesNumber, String ISBN){
+    public Book(String name, String price, String state, String cover, String author, int pagesNumber, String ISBN,
+                String publicationDate){
 
         super._name = name;
         super._price = price;
@@ -37,9 +37,9 @@ public class Book extends PurchasableItem{
         super._cover = cover;
 
         _author = author;
-        _publicationDate = publicationDate;
         _pagesNumber = pagesNumber;
         _ISBN = ISBN;
+        _publicationDate = publicationDate;
     }
 
     //Getters
@@ -48,12 +48,7 @@ public class Book extends PurchasableItem{
         return _author;
     }
 
-    public String getPublicationDate() {
-
-        return _publicationDate;
-    }
-
-    public String getPagesNumber() {
+    public int getPagesNumber() {
 
         return _pagesNumber;
     }
@@ -62,6 +57,12 @@ public class Book extends PurchasableItem{
 
         return _ISBN;
     }
+
+    public String getPublicationDate() {
+
+        return _publicationDate;
+    }
+
 
     //toString
 
@@ -87,15 +88,15 @@ public class Book extends PurchasableItem{
         Book book = (Book) o;
         return super._id == book._id && Objects.equals(super._name, book._name) && Objects.equals(super._price, book._price)
                 && Objects.equals(super._state, book._state) && Objects.equals(super._cover, book._cover)
-                && Objects.equals(_author, book._author) && Objects.equals(_publicationDate, book._publicationDate)
-                && Objects.equals(_pagesNumber, book._pagesNumber) && Objects.equals(_ISBN, book._ISBN);
+                && Objects.equals(_author, book._author) && _pagesNumber == book._pagesNumber
+                && Objects.equals(_ISBN, book._ISBN)&& Objects.equals(_publicationDate, book._publicationDate);
     }
 
     //hashCode
     @Override
     public int hashCode() {
 
-        return Objects.hash(super._id, super._name, super._price, super._state, super._cover, _author, _publicationDate,
-                _pagesNumber, _ISBN);
+        return Objects.hash(super._id, super._name, super._price, super._state, super._cover, _author, _pagesNumber, _ISBN,
+                _publicationDate);
     }
 }

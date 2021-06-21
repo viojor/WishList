@@ -97,12 +97,12 @@ public class HomeController implements ChangeListener {
 
     private List<Game> loadPendingGames() {
 
-        return _gameDAO.getGamesByStatus(PurchasableItem.ItemState.Pending.toString());
+        return _gameDAO.getByState(PurchasableItem.ItemState.Pending.toString());
     }
 
     private List<Game> loadPurchasedGames() {
 
-        return _gameDAO.getGamesByStatus(PurchasableItem.ItemState.Purchased.toString());
+        return _gameDAO.getByState(PurchasableItem.ItemState.Purchased.toString());
     }
 
     public void stateChanged(ChangeEvent e) {

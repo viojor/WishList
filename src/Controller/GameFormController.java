@@ -115,15 +115,15 @@ public class GameFormController implements ActionListener {
         }
         String cover = urlGameCover;
 
-        _gameModel = new Game(id, name, price, gender, releaseDateFormatDDMMYYYY, estimatedHours, totalHours, cover,
-                PurchasableItem.ItemState.Pending.toString());
+        _gameModel = new Game(id, name, price, cover, PurchasableItem.ItemState.Pending.toString() ,gender,
+                releaseDateFormatDDMMYYYY, estimatedHours, totalHours);
 
         addGameToDB();
     }
 
     private void addGameToDB() {
 
-        _gameDAO.insertGame(_gameModel);
+        _gameDAO.insert(_gameModel);
     }
 
     private String getUrlCoverSelected() {

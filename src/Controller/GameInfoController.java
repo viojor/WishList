@@ -25,7 +25,7 @@ public class GameInfoController implements ActionListener {
 
         _gameInfoView = gameInfoView;
         _gameDAO = new GameDAO();
-        _gameModel = _gameDAO.getGameById(idGameToShow);
+        _gameModel = _gameDAO.getById(idGameToShow);
 
         _gameInfoView.purchasedB.addActionListener(this);
 
@@ -42,11 +42,11 @@ public class GameInfoController implements ActionListener {
 
         loadCoverInLabel();
         _gameInfoView.nameValueL.setText(_gameModel.getName());
-        _gameInfoView.genreValueL.setText(_gameModel.get_gender());
+        _gameInfoView.genreValueL.setText(_gameModel.getGender());
         _gameInfoView.priceValueL.setText(_gameModel.getPrice());
-        _gameInfoView.releaseDateValueL.setText(_gameModel.get_releaseDate());
-        _gameInfoView.estimatedHoursValueL.setText(_gameModel.get_estimatedHours());
-        _gameInfoView.totalHoursValueL.setText(_gameModel.get_totalsHours());
+        _gameInfoView.releaseDateValueL.setText(_gameModel.getReleaseDate());
+        _gameInfoView.estimatedHoursValueL.setText(_gameModel.getEstimatedHours());
+        _gameInfoView.totalHoursValueL.setText(_gameModel.getTotalsHours());
     }
 
     private void loadCoverInLabel() {
@@ -87,7 +87,7 @@ public class GameInfoController implements ActionListener {
             int defaultListModelElementIndex = _defaultListModel.indexOf(_gameModel);
 
             _gameModel.setState(PurchasableItem.ItemState.Purchased.toString());
-            _gameDAO.updateStateGame(_gameModel.getId());
+            _gameDAO.updateState(_gameModel.getId());
 
             //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
             _defaultListModel.remove(defaultListModelElementIndex);

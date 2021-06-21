@@ -10,18 +10,19 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GameDAO {
+public class GameDAO implements PurchasableItemDAO<Game>{
 
     public GameDAO() {
 
         Connection connection = DBConnector.getConnection();
         if (!DBConnector.existTable("GAMES", connection)) {
 
-            createGamesTable();
+            createTable();
         }
     }
 
-    private void createGamesTable() {
+    @Override
+    public void createTable() {
 
         try {
 
@@ -32,6 +33,7 @@ public class GameDAO {
                     " name VARCHAR(255), price VARCHAR(255), gender VARCHAR(255), release_date VARCHAR(255)," +
                     " estimated_hours VARCHAR(255), total_hours VARCHAR(255), state VARCHAR(255))");
 
+            st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
@@ -39,20 +41,21 @@ public class GameDAO {
         }
     }
 
-    public void insertGame(Game elementToInsert) {
+    @Override
+    public void insert(Game newGame) {
 
         try {
 
             Connection connection = DBConnector.getConnection();
 
-            String cover = elementToInsert.getCover();
-            String name = elementToInsert.getName();
-            String price = elementToInsert.getPrice();
-            String gender = elementToInsert.get_gender();
-            String releaseDate = elementToInsert.get_releaseDate();
-            String estimatedHours = elementToInsert.get_estimatedHours();
-            String totalHours = elementToInsert.get_totalsHours();
-            String state = elementToInsert.getState();
+            String cover = newGame.getCover();
+            String name = newGame.getName();
+            String price = newGame.getPrice();
+            String gender = newGame.getGender();
+            String releaseDate = newGame.getReleaseDate();
+            String estimatedHours = newGame.getEstimatedHours();
+            String totalHours = newGame.getTotalsHours();
+            String state = newGame.getState();
 
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
                     "release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
@@ -67,6 +70,7 @@ public class GameDAO {
 
             preparedStatement.execute();
 
+            preparedStatement.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
@@ -74,21 +78,22 @@ public class GameDAO {
         }
     }
 
-    public void updateGame(Game upgradedElement) {
+    @Override
+    public void update(Game upgradedGame) {
 
         try {
 
             Connection connection = DBConnector.getConnection();
 
-            int id = upgradedElement.getId();
-            String cover = upgradedElement.getCover();
-            String name = upgradedElement.getName();
-            String price = upgradedElement.getPrice();
-            String gender = upgradedElement.get_gender();
-            String releaseDate = upgradedElement.get_releaseDate();
-            String estimatedHours = upgradedElement.get_estimatedHours();
-            String totalHours = upgradedElement.get_totalsHours();
-            String state = upgradedElement.getState();
+            int id = upgradedGame.getId();
+            String cover = upgradedGame.getCover();
+            String name = upgradedGame.getName();
+            String price = upgradedGame.getPrice();
+            String gender = upgradedGame.getGender();
+            String releaseDate = upgradedGame.getReleaseDate();
+            String estimatedHours = upgradedGame.getEstimatedHours();
+            String totalHours = upgradedGame.getTotalsHours();
+            String state = upgradedGame.getState();
 
             Statement st = connection.createStatement();
             st.executeUpdate("UPDATE GAMES " +
@@ -97,6 +102,7 @@ public class GameDAO {
                     estimatedHours + "', total_hours = '" + totalHours + "', state = '" + state + "'" +
                     " WHERE id = " + id);
 
+            st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
@@ -104,15 +110,17 @@ public class GameDAO {
         }
     }
 
-    public void deleteGame(int idElementToRemove) {
+    @Override
+    public void delete(int idGameRemove) {
 
         try {
 
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("DELETE FROM GAMES WHERE id = " + idElementToRemove + ")");
+            st.executeUpdate("DELETE FROM GAMES WHERE id = " + idGameRemove);
 
+            st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
@@ -120,7 +128,8 @@ public class GameDAO {
         }
     }
 
-    public List<Game> getGamesByStatus(String statusOfGame) {
+    @Override
+    public List<Game> getByState(String stateOfGame) {
 
         List<Game> gameList = new LinkedList<>();
         try {
@@ -128,32 +137,35 @@ public class GameDAO {
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE state = '" + statusOfGame + "'");
+            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE state = '" + stateOfGame + "'");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                String cover = rs.getString("cover");
                 String name = rs.getString("name");
                 String price = rs.getString("price");
+                String cover = rs.getString("cover");
+                String state = rs.getString("state");
                 String gender = rs.getString("gender");
                 String releaseDate = rs.getString("release_date");
                 String estimatedHours = rs.getString("estimated_hours");
                 String totalHours = rs.getString("total_hours");
-                String state = rs.getString("state");
 
-                Game gameSelected = new Game(id, name, price, gender, releaseDate, estimatedHours, totalHours, cover, state);
+                Game gameSelected = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours);
                 gameList.add(gameSelected);
             }
 
+            rs.close();
+            st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting games with status " + statusOfGame + " from 'GAMES': " + e);
+            System.out.println("Error getting games with status " + stateOfGame + " from 'GAMES': " + e);
         }
         return gameList;
     }
 
-    public Game getGameById(int gameId) {
+    @Override
+    public Game getById(int gameId) {
 
         Game gameWithId = new Game();
         try {
@@ -165,18 +177,20 @@ public class GameDAO {
             while (rs.next()) {
 
                 int id = rs.getInt("id");
-                String cover = rs.getString("cover");
                 String name = rs.getString("name");
                 String price = rs.getString("price");
+                String cover = rs.getString("cover");
+                String state = rs.getString("state");
                 String gender = rs.getString("gender");
                 String releaseDate = rs.getString("release_date");
                 String estimatedHours = rs.getString("estimated_hours");
                 String totalHours = rs.getString("total_hours");
-                String state = rs.getString("state");
 
-                gameWithId = new Game(id, name, price, gender, releaseDate, estimatedHours, totalHours, cover, state);
+                gameWithId = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours);
             }
 
+            st.close();
+            rs.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
@@ -200,7 +214,10 @@ public class GameDAO {
                     maxId = rs.getInt(1);
                 }
             }
+
             rs.close();
+            st.close();
+            DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
             System.out.println("Error getting the max id from 'GAMES': " + e);
@@ -208,7 +225,8 @@ public class GameDAO {
         return maxId;
     }
 
-    public void updateStateGame(int gameId) {
+    @Override
+    public void updateState(int gameId) {
 
         try {
 
@@ -218,6 +236,7 @@ public class GameDAO {
             //We can only change from Pending to Purchased
             st.executeUpdate("UPDATE GAMES SET state = '" + PurchasableItem.ItemState.Purchased + "' WHERE id = " + gameId);
 
+            st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 

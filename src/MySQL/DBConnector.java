@@ -10,7 +10,7 @@ public class DBConnector {
 
     private static final String USER_DB = "root";
     private static final String PASSWORD_DB = "c0ntr4s3ñ4_p4r4_MySQL";
-    private static final String URL_DB = "jdbc:mysql://localhost/games_db";
+    private static final String URL_DB = "jdbc:mysql://localhost/wishlist_db";
 
     public static Connection getConnection() {
 

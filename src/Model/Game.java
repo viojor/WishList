@@ -43,22 +43,22 @@ public class Game extends PurchasableItem{
     }
 
     //Getters
-    public String get_gender() {
+    public String getGender() {
 
         return _gender;
     }
 
-    public String get_releaseDate() {
+    public String getReleaseDate() {
 
         return _releaseDate;
     }
 
-    public String get_estimatedHours() {
+    public String getEstimatedHours() {
 
         return _estimatedHours;
     }
 
-    public String get_totalsHours() {
+    public String getTotalsHours() {
 
         return _totalsHours;
     }
