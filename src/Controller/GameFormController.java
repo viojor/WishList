@@ -20,10 +20,6 @@ import java.util.Date;
 
 public class GameFormController implements ActionListener {
 
-    private static final String[] GENRES_GAMES = {"Action", "Adventure", "Platform", "Shooter", "Fighting", "Beat 'em up",
-            "Survival Horror", "Visual Novel", "RPG", "Roguelike", "Simulation", "Real-time strategy",
-            "Turn-based strategy", "Sports", "MMO", "Other"};
-    private static final String NO_ASSIGNED_GENRE = "No Assigned";
     private static final String URL_IMAGE_NOT_AVAILABLE = "C:\\Cover_Not_Available.jpg";
 
     private final GameForm _viewGameForm;
@@ -34,7 +30,7 @@ public class GameFormController implements ActionListener {
     private String genreSelected;
     private String urlGameCover;
 
-    private final GameFormValidation _formValidation;
+    private final ItemFormValidation _formValidation;
 
     public GameFormController(GameForm viewGameForm) {
 
@@ -44,11 +40,11 @@ public class GameFormController implements ActionListener {
         _viewGameForm.CreateB.addActionListener(this);
         _viewGameForm.CoverB.addActionListener(this);
 
-        DefaultComboBoxModel<String> genresGamesDefaultModel = new DefaultComboBoxModel<>(GENRES_GAMES);
+        DefaultComboBoxModel<String> genresGamesDefaultModel = new DefaultComboBoxModel<>(Game.GENRES_GAMES);
         _viewGameForm.GenreCB.setModel(genresGamesDefaultModel);
         _viewGameForm.GenreCB.addActionListener(this);
 
-        _formValidation = new GameFormValidation();
+        _formValidation = new ItemFormValidation();
     }
 
     public void setDefaultListModel(DefaultListModel<Game> defaultListModel){
@@ -61,8 +57,10 @@ public class GameFormController implements ActionListener {
         if (e.getSource() == _viewGameForm.CreateB) {
             if(_formValidation.isFieldNotEmpty(_viewGameForm.NameTF) & _formValidation.isFieldNotEmpty(_viewGameForm.EstimatedHoursTF) &
                     _formValidation.isFieldNotEmpty(_viewGameForm.TotalHoursTF) & _formValidation.isFieldNotEmpty(_viewGameForm.PriceTF) &
-                    _formValidation.isFieldNotEmpty(_viewGameForm.ReleaseDateDP.getEditor()) && _formValidation.isFieldNumeric(_viewGameForm.EstimatedHoursTF) &
-                    _formValidation.isFieldNumeric(_viewGameForm.TotalHoursTF) & _formValidation.isFieldNumeric(_viewGameForm.PriceTF)){
+                    _formValidation.isFieldNotEmpty(_viewGameForm.ReleaseDateDP.getEditor())
+                    & _formValidation.isComboBoxNotEmpty(_viewGameForm.GenreCB.getEditor())
+                    && _formValidation.isFieldNumericReal(_viewGameForm.EstimatedHoursTF) & _formValidation.isFieldNumericReal(_viewGameForm.TotalHoursTF) &
+                    _formValidation.isFieldNumericReal(_viewGameForm.PriceTF)){
 
                 createGameWithInputs();
                 _defaultListGameModel.addElement(_gameModel);
@@ -83,13 +81,9 @@ public class GameFormController implements ActionListener {
         else if(e.getSource() == _viewGameForm.GenreCB){
 
             Object objectSelected = _viewGameForm.GenreCB.getSelectedItem();
-            if(objectSelected != null){
+            if(objectSelected != null) {
 
                 genreSelected = objectSelected.toString();
-            }
-            else{
-
-                genreSelected = NO_ASSIGNED_GENRE;
             }
         }
     }
@@ -128,7 +122,7 @@ public class GameFormController implements ActionListener {
 
     private String getUrlCoverSelected() {
 
-        String fileUrl = null;
+        String fileUrl;
         JFileChooser chooser = new JFileChooser();
 
         String[] imageSuffixes = ImageIO.getReaderFileSuffixes();
@@ -143,6 +137,10 @@ public class GameFormController implements ActionListener {
 
             File selectedFile = chooser.getSelectedFile();
             fileUrl = selectedFile.getAbsolutePath();
+        }
+        else{
+
+            fileUrl = urlGameCover;
         }
         return fileUrl;
     }

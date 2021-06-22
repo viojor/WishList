@@ -4,6 +4,10 @@ import java.util.Objects;
 
 public class Game extends PurchasableItem{
 
+    public static final String[] GENRES_GAMES = {"", "Action", "Adventure", "Platform", "Shooter", "Fighting", "Beat 'em up",
+            "Survival Horror", "Visual Novel", "RPG", "Roguelike", "Simulation", "Real-time strategy",
+            "Turn-based strategy", "Sports", "MMO", "Other"};
+
     private String _gender;
     private String _releaseDate;
     private String _estimatedHours;

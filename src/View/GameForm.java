@@ -34,6 +34,7 @@ public class GameForm extends JFrame {
         PriceTF.setName("Price");
         EstimatedHoursTF.setName("Estimated Hours");
         TotalHoursTF.setName("Total Hours");
+        GenreCB.getEditor().getEditorComponent().setName("Genre");
         ReleaseDateDP.getEditor().setName("Release Date");
         ReleaseDateDP.getEditor().setEditable(false);
 
