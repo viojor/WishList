@@ -2,6 +2,8 @@ package Model;
 
 public abstract class PurchasableItem {
 
+    public static final String URL_IMAGE_NOT_AVAILABLE = "C:\\Cover_Not_Available.jpg";
+
     public enum ItemState {
 
         Purchased,

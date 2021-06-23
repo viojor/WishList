@@ -1,11 +1,7 @@
 package Controller;
 
-import Model.Game;
-import Model.GameDAO;
-import Model.PurchasableItem;
-import View.GameForm;
-import View.GameInfo;
-import View.ListItemsViewer;
+import Model.*;
+import View.*;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -22,45 +18,57 @@ public class ListItemsViewerController implements ChangeListener {
     private static final String PURCHASED_TAB = "Purchased";
 
     private final ListItemsViewer _viewListItemsViewer;
-    private final GameDAO _gameDAO;
+    private final PurchasableItemDAO _itemDAO;
 
-    private DefaultListModel<Game> _defaultListGamesModel;
+    private final DefaultListModel _defaultListItemsModel;
 
-    public ListItemsViewerController(ListItemsViewer viewListItemsViewer) {
+    private final String _typeOfItemSelected;
+
+    public ListItemsViewerController(ListItemsViewer viewListItemsViewer, String nameTableItemsSelected) {
 
         _viewListItemsViewer = viewListItemsViewer;
-        _gameDAO = new GameDAO();
+        _typeOfItemSelected = nameTableItemsSelected;
+        if(_typeOfItemSelected.equals(BookDAO.BOOKS_TABLE_NAME)){
+
+            _defaultListItemsModel = new DefaultListModel<Book>();
+            _itemDAO = new BookDAO();
+
+            _viewListItemsViewer.addItemB.addActionListener(e -> openBookForm());
+        }
+        else{ //GAMES
+
+            _defaultListItemsModel = new DefaultListModel<Game>();
+            _itemDAO = new GameDAO();
+
+            _viewListItemsViewer.addItemB.addActionListener(e -> openGameForm());
+        }
 
         _viewListItemsViewer.tabbedPanel.addChangeListener(this);
-        _viewListItemsViewer.addItemB.addActionListener(e -> openGameForm());
     }
 
     public void loadTab() {
 
         if (_viewListItemsViewer.tabbedPanel.getSelectedIndex() != -1) {
 
-            _defaultListGamesModel = new DefaultListModel<>();
-            List<Game> gameList = getGamesList();
-            for (Game game : gameList) {
+            _defaultListItemsModel.clear();
+            List<PurchasableItem> itemsList = getItemsList();
+            for (PurchasableItem item : itemsList) {
 
-                _defaultListGamesModel.addElement(game);
+                _defaultListItemsModel.addElement(item);
             }
 
-            JList<Game> gameJList = new JList<>(_defaultListGamesModel);
-            gameJList.setCellRenderer(new ItemRenderer());
-            gameJList.addMouseListener(new MouseListener() {
+            JList<PurchasableItem> itemsJList = new JList<>(_defaultListItemsModel);
+            itemsJList.setCellRenderer(new ItemRenderer());
+            itemsJList.addMouseListener(new MouseListener() {
                 public void mouseClicked(MouseEvent e) {
+                    if(_typeOfItemSelected.equals(BookDAO.BOOKS_TABLE_NAME)){
 
-                    GameInfo gi = new GameInfo("GameInfo");
-                    int selectedGameId = gameJList.getSelectedValue().getId();
+                        openInfoBook(itemsJList.getSelectedValue().getId());
+                    }
+                    else { //GAMES
 
-                    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-                    gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
-
-                    GameInfoController gameInfoController = new GameInfoController(gi, selectedGameId);
-                    gameInfoController.setDefaultListModel(_defaultListGamesModel);
-
-                    gi.setVisible(true);
+                        openInfoGame(itemsJList.getSelectedValue().getId());
+                    }
                 }
 
                 public void mousePressed(MouseEvent e) {
@@ -76,33 +84,33 @@ public class ListItemsViewerController implements ChangeListener {
                 }
             });
 
-            gameJList.setBackground(new Color(156, 143, 231));
+            itemsJList.setBackground(new Color(156, 143, 231));
             JScrollPane jsp = (JScrollPane) _viewListItemsViewer.tabbedPanel.getSelectedComponent();
-            jsp.setViewportView(gameJList);
+            jsp.setViewportView(itemsJList);
         }
     }
 
-    private List<Game> getGamesList() {
+    private List getItemsList() {
 
-        List<Game> gameList = new LinkedList<>();
+        List itemsList = new LinkedList<>();
         if (_viewListItemsViewer.tabbedPanel.getTitleAt(_viewListItemsViewer.tabbedPanel.getSelectedIndex()).equals(PENDING_TAB)) {
 
-            gameList = loadPendingGames();
+            itemsList = loadPendingItems();
         } else if (_viewListItemsViewer.tabbedPanel.getTitleAt(_viewListItemsViewer.tabbedPanel.getSelectedIndex()).equals(PURCHASED_TAB)) {
 
-            gameList = loadPurchasedGames();
+            itemsList = loadPurchasedItems();
         }
-        return gameList;
+        return itemsList;
     }
 
-    private List<Game> loadPendingGames() {
+    private List loadPendingItems() {
 
-        return _gameDAO.getByState(PurchasableItem.ItemState.Pending.toString());
+        return _itemDAO.getByState(PurchasableItem.ItemState.Pending.toString());
     }
 
-    private List<Game> loadPurchasedGames() {
+    private List loadPurchasedItems() {
 
-        return _gameDAO.getByState(PurchasableItem.ItemState.Purchased.toString());
+        return _itemDAO.getByState(PurchasableItem.ItemState.Purchased.toString());
     }
 
     public void stateChanged(ChangeEvent e) {
@@ -112,14 +120,53 @@ public class ListItemsViewerController implements ChangeListener {
 
     private void openGameForm() {
 
-        GameForm gf = new GameForm("AddGame");
+        GameForm gf = new GameForm("Add Game");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         gf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
 
         GameFormController controller = new GameFormController(gf);
-        controller.setDefaultListModel(_defaultListGamesModel);
+        controller.setDefaultListModel(_defaultListItemsModel);
 
         gf.setVisible(true);
+    }
+
+    private void openBookForm() {
+
+        BookForm bf = new BookForm("Add Book");
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        bf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+
+        BookFormController controller = new BookFormController(bf);
+        controller.setDefaultListModel(_defaultListItemsModel);
+
+        bf.setVisible(true);
+    }
+
+    private void openInfoGame(int idItemSelected){
+
+        GameInfo gi = new GameInfo("Game Info");
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+
+        GameInfoController gameInfoController = new GameInfoController(gi, idItemSelected);
+        gameInfoController.setDefaultListModel(_defaultListItemsModel);
+
+        gi.setVisible(true);
+    }
+
+    private void openInfoBook(int idItemSelected){
+
+        BookInfo bi = new BookInfo("Book Info");
+
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        bi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+
+        BookInfoController bookInfoController = new BookInfoController(bi, idItemSelected);
+        bookInfoController.setDefaultListModel(_defaultListItemsModel);
+
+        bi.setVisible(true);
     }
 }

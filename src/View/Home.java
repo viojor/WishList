@@ -1,5 +1,6 @@
 package View;
 
+import Controller.HomeController;
 import Controller.ListItemsViewerController;
 
 import javax.swing.*;
@@ -28,8 +29,7 @@ public class Home extends JFrame{
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         home.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
 
-        /*ListItemsViewerController controller = new ListItemsViewerController(listItemsViewer);
-        controller.loadTab();*/
+        HomeController homeController = new HomeController(home);
 
         home.setVisible(true);
     }

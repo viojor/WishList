@@ -20,8 +20,6 @@ import java.util.Date;
 
 public class GameFormController implements ActionListener {
 
-    private static final String URL_IMAGE_NOT_AVAILABLE = "C:\\Cover_Not_Available.jpg";
-
     private final GameForm _viewGameForm;
     private final GameDAO _gameDAO;
     private Game _gameModel;
@@ -104,7 +102,7 @@ public class GameFormController implements ActionListener {
         String totalHours = _viewGameForm.TotalHoursTF.getText();
         if(urlGameCover == null){
 
-            urlGameCover = URL_IMAGE_NOT_AVAILABLE;
+            urlGameCover = PurchasableItem.URL_IMAGE_NOT_AVAILABLE;
             loadCoverInLabel();
         }
         String cover = urlGameCover;
@@ -159,7 +157,7 @@ public class GameFormController implements ActionListener {
         if (coverImage != null) {
 
             _viewGameForm.CoverImage.setIcon(new ImageIcon(new ImageIcon(coverImage).getImage()
-                    .getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+                    .getScaledInstance(200, 250, Image.SCALE_SMOOTH)));
         }
     }
 }

@@ -6,12 +6,14 @@ import java.sql.*;
 import java.util.LinkedList;
 import java.util.List;
 
-public class BookDAO implements PurchasableItemDAO<Book>{
+public class BookDAO extends PurchasableItemDAO<Book> {
+
+    public static final String BOOKS_TABLE_NAME = "BOOKS";
 
     public BookDAO(){
 
         Connection connection = DBConnector.getConnection();
-        if (!DBConnector.existTable("BOOKS", connection)) {
+        if (!DBConnector.existTable(BOOKS_TABLE_NAME, connection)) {
 
             createTable();
         }
@@ -25,7 +27,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("CREATE TABLE BOOKS (id INT PRIMARY KEY auto_increment, cover VARCHAR(255)," +
+            st.executeUpdate("CREATE TABLE " + BOOKS_TABLE_NAME + " (id INT PRIMARY KEY auto_increment, cover VARCHAR(255)," +
                     " name VARCHAR(255), price VARCHAR(255), author VARCHAR(255), pages_number INT," +
                     " ISBN VARCHAR(255), publication_date VARCHAR(255), state VARCHAR(255))");
 
@@ -33,7 +35,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error creating the table 'BOOKS': " + e);
+            System.out.println("Error creating the table '" + BOOKS_TABLE_NAME + "': " + e);
         }
     }
 
@@ -53,8 +55,8 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             String publicationDate = newBook.getPublicationDate();
             String state = newBook.getState();
 
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO BOOKS (cover, name, price, " +
-                    "author, pages_number, ISBN, publication_date, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " + BOOKS_TABLE_NAME +
+                    " (cover, name, price, author, pages_number, ISBN, publication_date, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, cover);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, price);
@@ -70,7 +72,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error inserting a new element on 'BOOKS': " + e);
+            System.out.println("Error inserting a new element on '" + BOOKS_TABLE_NAME + "': " + e);
         }
     }
 
@@ -92,8 +94,8 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             String state = upgradedBook.getState();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE BOOKS " +
-                    "SET cover = '" + cover + "', name = '" + name + "', price = '" + price +
+            st.executeUpdate("UPDATE " + BOOKS_TABLE_NAME +
+                    " SET cover = '" + cover + "', name = '" + name + "', price = '" + price +
                     "', author = '" + author + "', pages_number = " + pagesNumber + ", ISBN = '" + ISBN +
                     "', publication_date = '" + publicationDate + "', state = '" + state + "'" +
                     " WHERE id = " + id);
@@ -102,7 +104,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error updating an element from 'BOOKS': " + e);
+            System.out.println("Error updating an element from '" + BOOKS_TABLE_NAME + "': " + e);
         }
     }
 
@@ -114,13 +116,13 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("DELETE FROM BOOKS WHERE id = " + idBookRemove);
+            st.executeUpdate("DELETE FROM " + BOOKS_TABLE_NAME + " WHERE id = " + idBookRemove);
 
             st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error removing an entry from 'BOOKS': " + e);
+            System.out.println("Error removing an entry from '" + BOOKS_TABLE_NAME + "': " + e);
         }
     }
 
@@ -133,7 +135,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM BOOKS WHERE state = '" + stateOfBook + "'");
+            ResultSet rs = st.executeQuery("SELECT * FROM " + BOOKS_TABLE_NAME + " WHERE state = '" + stateOfBook + "'");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -155,7 +157,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting books with status " + stateOfBook + " from 'BOOKS': " + e);
+            System.out.println("Error getting books with status " + stateOfBook + " from '" + BOOKS_TABLE_NAME + "': " + e);
         }
         return bookList;
     }
@@ -169,7 +171,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM BOOKS WHERE id = " + bookId + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM " + BOOKS_TABLE_NAME + " WHERE id = " + bookId + "");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -190,7 +192,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting the book with the id " + bookId + " from 'BOOKS': " + e);
+            System.out.println("Error getting the book with the id " + bookId + " from '" + BOOKS_TABLE_NAME + "': " + e);
         }
         return bookWithId;
     }
@@ -204,7 +206,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id FROM BOOKS");
+            ResultSet rs = st.executeQuery("SELECT id FROM " + BOOKS_TABLE_NAME);
             while (rs.next()) {
                 if (rs.getInt(1) > maxId) {
 
@@ -217,7 +219,7 @@ public class BookDAO implements PurchasableItemDAO<Book>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting the max id from 'BOOKS': " + e);
+            System.out.println("Error getting the max id from '" + BOOKS_TABLE_NAME + "': " + e);
         }
         return maxId;
     }
@@ -231,13 +233,13 @@ public class BookDAO implements PurchasableItemDAO<Book>{
 
             Statement st = connection.createStatement();
             //We can only change from Pending to Purchased
-            st.executeUpdate("UPDATE BOOKS SET state = '" + PurchasableItem.ItemState.Purchased + "' WHERE id = " + bookId);
+            st.executeUpdate("UPDATE " + BOOKS_TABLE_NAME + " SET state = '" + PurchasableItem.ItemState.Purchased + "' WHERE id = " + bookId);
 
             st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error updating the state of an element from 'BOOKS': " + e);
+            System.out.println("Error updating the state of an element from '" + BOOKS_TABLE_NAME + "': " + e);
         }
     }
 }

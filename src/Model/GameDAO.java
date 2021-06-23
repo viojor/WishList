@@ -10,12 +10,14 @@ import java.sql.Statement;
 import java.util.LinkedList;
 import java.util.List;
 
-public class GameDAO implements PurchasableItemDAO<Game>{
+public class GameDAO extends PurchasableItemDAO<Game> {
+
+    public static final String GAMES_TABLE_NAME = "GAMES";
 
     public GameDAO() {
 
         Connection connection = DBConnector.getConnection();
-        if (!DBConnector.existTable("GAMES", connection)) {
+        if (!DBConnector.existTable(GAMES_TABLE_NAME, connection)) {
 
             createTable();
         }
@@ -29,7 +31,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("CREATE TABLE GAMES (id INT PRIMARY KEY auto_increment, cover VARCHAR(255)," +
+            st.executeUpdate("CREATE TABLE " + GAMES_TABLE_NAME + " (id INT PRIMARY KEY auto_increment, cover VARCHAR(255)," +
                     " name VARCHAR(255), price VARCHAR(255), gender VARCHAR(255), release_date VARCHAR(255)," +
                     " estimated_hours VARCHAR(255), total_hours VARCHAR(255), state VARCHAR(255))");
 
@@ -37,7 +39,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error creating the table 'GAMES': " + e);
+            System.out.println("Error creating the table '" + GAMES_TABLE_NAME + "': " + e);
         }
     }
 
@@ -57,8 +59,8 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             String totalHours = newGame.getTotalsHours();
             String state = newGame.getState();
 
-            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO GAMES (cover, name, price, gender, " +
-                    "release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " + GAMES_TABLE_NAME +
+                    " (cover, name, price, gender, release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, cover);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, price);
@@ -74,7 +76,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error inserting a new element on 'GAMES': " + e);
+            System.out.println("Error inserting a new element on '" + GAMES_TABLE_NAME + "': " + e);
         }
     }
 
@@ -96,8 +98,8 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             String state = upgradedGame.getState();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE GAMES " +
-                    "SET cover = '" + cover + "', name = '" + name + "', price = '" + price +
+            st.executeUpdate("UPDATE " + GAMES_TABLE_NAME +
+                    " SET cover = '" + cover + "', name = '" + name + "', price = '" + price +
                     "', gender = '" + gender + "', release_date = '" + releaseDate + "', estimated_hours = '" +
                     estimatedHours + "', total_hours = '" + totalHours + "', state = '" + state + "'" +
                     " WHERE id = " + id);
@@ -106,7 +108,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error updating an element from 'GAMES': " + e);
+            System.out.println("Error updating an element from '" + GAMES_TABLE_NAME + "': " + e);
         }
     }
 
@@ -118,13 +120,13 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            st.executeUpdate("DELETE FROM GAMES WHERE id = " + idGameRemove);
+            st.executeUpdate("DELETE FROM " + GAMES_TABLE_NAME + " WHERE id = " + idGameRemove);
 
             st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error removing an entry from 'GAMES': " + e);
+            System.out.println("Error removing an entry from '" + GAMES_TABLE_NAME + "': " + e);
         }
     }
 
@@ -137,7 +139,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE state = '" + stateOfGame + "'");
+            ResultSet rs = st.executeQuery("SELECT * FROM " + GAMES_TABLE_NAME + " WHERE state = '" + stateOfGame + "'");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -159,7 +161,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting games with status " + stateOfGame + " from 'GAMES': " + e);
+            System.out.println("Error getting games with status " + stateOfGame + " from '" + GAMES_TABLE_NAME + "': " + e);
         }
         return gameList;
     }
@@ -173,7 +175,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM GAMES WHERE id = " + gameId + "");
+            ResultSet rs = st.executeQuery("SELECT * FROM " + GAMES_TABLE_NAME + " WHERE id = " + gameId + "");
             while (rs.next()) {
 
                 int id = rs.getInt("id");
@@ -194,7 +196,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting the game with the id " + gameId + " from 'GAMES': " + e);
+            System.out.println("Error getting the game with the id " + gameId + " from '" + GAMES_TABLE_NAME + "': " + e);
         }
         return gameWithId;
     }
@@ -207,7 +209,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             Connection connection = DBConnector.getConnection();
 
             Statement st = connection.createStatement();
-            ResultSet rs = st.executeQuery("SELECT id FROM GAMES");
+            ResultSet rs = st.executeQuery("SELECT id FROM " + GAMES_TABLE_NAME);
             while (rs.next()) {
                 if (rs.getInt(1) > maxId) {
 
@@ -220,7 +222,7 @@ public class GameDAO implements PurchasableItemDAO<Game>{
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error getting the max id from 'GAMES': " + e);
+            System.out.println("Error getting the max id from '" + GAMES_TABLE_NAME + "': " + e);
         }
         return maxId;
     }
@@ -234,13 +236,14 @@ public class GameDAO implements PurchasableItemDAO<Game>{
 
             Statement st = connection.createStatement();
             //We can only change from Pending to Purchased
-            st.executeUpdate("UPDATE GAMES SET state = '" + PurchasableItem.ItemState.Purchased + "' WHERE id = " + gameId);
+            st.executeUpdate("UPDATE " + GAMES_TABLE_NAME + " SET state = '" + PurchasableItem.ItemState.Purchased +
+                    "' WHERE id = " + gameId);
 
             st.close();
             DBConnector.disconnectDB(connection);
         } catch (SQLException e) {
 
-            System.out.println("Error updating the state of an element from 'GAMES': " + e);
+            System.out.println("Error updating the state of an element from '" + GAMES_TABLE_NAME + "': " + e);
         }
     }
 }

@@ -22,7 +22,7 @@ public class ListItemsViewer extends JFrame {
         this.pack();
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
 
         ListItemsViewer listItemsViewer = new ListItemsViewer("List Data");
 
@@ -33,5 +33,5 @@ public class ListItemsViewer extends JFrame {
         controller.loadTab();
 
         listItemsViewer.setVisible(true);
-    }
+    }*/
 }

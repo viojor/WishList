@@ -13,14 +13,14 @@ public class Book extends PurchasableItem{
 
     }
 
-    public Book(int id, String name, String price, String state, String cover, String author, int pagesNumber,
+    public Book(int id, String name, String price, String cover, String state, String author, int pagesNumber,
                 String ISBN, String publicationDate){
 
         super._id = id;
         super._name = name;
         super._price = price;
-        super._state = state;
         super._cover = cover;
+        super._state = state;
 
         _author = author;
         _pagesNumber = pagesNumber;
@@ -28,13 +28,13 @@ public class Book extends PurchasableItem{
         _publicationDate = publicationDate;
     }
 
-    public Book(String name, String price, String state, String cover, String author, int pagesNumber, String ISBN,
+    public Book(String name, String price, String cover, String state, String author, int pagesNumber, String ISBN,
                 String publicationDate){
 
         super._name = name;
         super._price = price;
-        super._state = state;
         super._cover = cover;
+        super._state = state;
 
         _author = author;
         _pagesNumber = pagesNumber;

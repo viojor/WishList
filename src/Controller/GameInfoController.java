@@ -63,7 +63,7 @@ public class GameInfoController implements ActionListener {
         if (coverImage != null) {
 
             _gameInfoView.coverImage.setIcon(new ImageIcon(new ImageIcon(coverImage).getImage()
-                    .getScaledInstance(150, 200, Image.SCALE_DEFAULT)));
+                    .getScaledInstance(200, 250, Image.SCALE_SMOOTH)));
         }
     }
 
@@ -73,7 +73,7 @@ public class GameInfoController implements ActionListener {
 
             _gameInfoView.purchasedB.setVisible(false);
             _gameInfoView.purchasedB.setEnabled(false);
-        } else { //Game.GameStatus.Pending
+        } else { //PurchasableItem.ItemState.Pending
 
             _gameInfoView.purchasedB.setVisible(true);
             _gameInfoView.purchasedB.setEnabled(true);
