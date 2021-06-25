@@ -17,7 +17,7 @@ public class BookInfoController implements ActionListener {
     private final BookInfo _bookInfoView;
     private final BookDAO _bookDAO;
     private final Book _bookModel;
-    private DefaultListModel<Book> _defaultListModel;
+    private DefaultListModel<PurchasableItem> _defaultListModel;
 
     public BookInfoController(BookInfo bookInfoView, int idBookToShow) {
 
@@ -31,7 +31,7 @@ public class BookInfoController implements ActionListener {
         setPurchasedButtonVisibility();
     }
 
-    public void setDefaultListModel(DefaultListModel<Book> defaultListModel){
+    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
 
         _defaultListModel = defaultListModel;
     }

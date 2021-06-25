@@ -23,7 +23,7 @@ public class GameFormController implements ActionListener {
     private final GameForm _viewGameForm;
     private final GameDAO _gameDAO;
     private Game _gameModel;
-    private DefaultListModel<Game> _defaultListGameModel;
+    private DefaultListModel<PurchasableItem> _defaultListGameModel;
 
     private String genreSelected;
     private String urlGameCover;
@@ -45,7 +45,7 @@ public class GameFormController implements ActionListener {
         _formValidation = new ItemFormValidation();
     }
 
-    public void setDefaultListModel(DefaultListModel<Game> defaultListModel){
+    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
 
         _defaultListGameModel = defaultListModel;
     }

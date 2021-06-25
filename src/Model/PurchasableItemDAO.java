@@ -12,7 +12,7 @@ public abstract class PurchasableItemDAO<T> {
 
     public abstract void delete(int idElementRemove);
 
-    public abstract List<T> getByState(String stateOfElement);
+    public abstract List<PurchasableItem> getByState(String stateOfElement);
 
     public abstract T getById(int elementId);
 

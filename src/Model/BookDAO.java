@@ -127,9 +127,9 @@ public class BookDAO extends PurchasableItemDAO<Book> {
     }
 
     @Override
-    public List<Book> getByState(String stateOfBook) {
+    public List<PurchasableItem> getByState(String stateOfBook) {
 
-        List<Book> bookList = new LinkedList<>();
+        List<PurchasableItem> bookList = new LinkedList<>();
         try {
 
             Connection connection = DBConnector.getConnection();

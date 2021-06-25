@@ -21,7 +21,7 @@ public class BookFormController implements ActionListener {
     private final BookForm _viewBookForm;
     private final BookDAO _bookDAO;
     private Book _bookModel;
-    private DefaultListModel<Book> _defaultListBookModel;
+    private DefaultListModel<PurchasableItem> _defaultListBookModel;
 
     private String urlBookCover;
 
@@ -38,7 +38,7 @@ public class BookFormController implements ActionListener {
         _formValidation = new ItemFormValidation();
     }
 
-    public void setDefaultListModel(DefaultListModel<Book> defaultListModel){
+    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
 
         _defaultListBookModel = defaultListModel;
     }

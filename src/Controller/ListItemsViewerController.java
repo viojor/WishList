@@ -18,28 +18,25 @@ public class ListItemsViewerController implements ChangeListener {
     private static final String PURCHASED_TAB = "Purchased";
 
     private final ListItemsViewer _viewListItemsViewer;
-    private final PurchasableItemDAO _itemDAO;
+    private final PurchasableItemDAO<?> _itemDAO;
 
-    private final DefaultListModel _defaultListItemsModel;
+    private final DefaultListModel<PurchasableItem> _defaultListItemsModel;
 
     private final String _typeOfItemSelected;
 
     public ListItemsViewerController(ListItemsViewer viewListItemsViewer, String nameTableItemsSelected) {
 
         _viewListItemsViewer = viewListItemsViewer;
+        _defaultListItemsModel = new DefaultListModel<>();
         _typeOfItemSelected = nameTableItemsSelected;
         if(_typeOfItemSelected.equals(BookDAO.BOOKS_TABLE_NAME)){
 
-            _defaultListItemsModel = new DefaultListModel<Book>();
             _itemDAO = new BookDAO();
-
             _viewListItemsViewer.addItemB.addActionListener(e -> openBookForm());
         }
         else{ //GAMES
 
-            _defaultListItemsModel = new DefaultListModel<Game>();
             _itemDAO = new GameDAO();
-
             _viewListItemsViewer.addItemB.addActionListener(e -> openGameForm());
         }
 
@@ -90,9 +87,9 @@ public class ListItemsViewerController implements ChangeListener {
         }
     }
 
-    private List getItemsList() {
+    private List<PurchasableItem> getItemsList() {
 
-        List itemsList = new LinkedList<>();
+        List<PurchasableItem> itemsList = new LinkedList<>();
         if (_viewListItemsViewer.tabbedPanel.getTitleAt(_viewListItemsViewer.tabbedPanel.getSelectedIndex()).equals(PENDING_TAB)) {
 
             itemsList = loadPendingItems();
@@ -103,12 +100,12 @@ public class ListItemsViewerController implements ChangeListener {
         return itemsList;
     }
 
-    private List loadPendingItems() {
+    private List<PurchasableItem> loadPendingItems() {
 
         return _itemDAO.getByState(PurchasableItem.ItemState.Pending.toString());
     }
 
-    private List loadPurchasedItems() {
+    private List<PurchasableItem> loadPurchasedItems() {
 
         return _itemDAO.getByState(PurchasableItem.ItemState.Purchased.toString());
     }

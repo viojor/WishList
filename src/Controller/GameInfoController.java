@@ -19,7 +19,7 @@ public class GameInfoController implements ActionListener {
     private final GameInfo _gameInfoView;
     private final GameDAO _gameDAO;
     private final Game _gameModel;
-    private DefaultListModel<Game> _defaultListModel;
+    private DefaultListModel<PurchasableItem> _defaultListModel;
 
     public GameInfoController(GameInfo gameInfoView, int idGameToShow) {
 
@@ -33,7 +33,7 @@ public class GameInfoController implements ActionListener {
         setPurchasedButtonVisibility();
     }
 
-    public void setDefaultListModel(DefaultListModel<Game> defaultListModel){
+    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
 
         _defaultListModel = defaultListModel;
     }

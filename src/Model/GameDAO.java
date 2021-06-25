@@ -131,9 +131,9 @@ public class GameDAO extends PurchasableItemDAO<Game> {
     }
 
     @Override
-    public List<Game> getByState(String stateOfGame) {
+    public List<PurchasableItem> getByState(String stateOfGame) {
 
-        List<Game> gameList = new LinkedList<>();
+        List<PurchasableItem> gameList = new LinkedList<>();
         try {
 
             Connection connection = DBConnector.getConnection();
