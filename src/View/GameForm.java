@@ -25,6 +25,9 @@ public class GameForm extends JFrame {
     public JLabel CoverImage;
     public JComboBox<String> GenreCB;
     public JXDatePicker ReleaseDateDP;
+    public JRadioButton Edition_NormalRB;
+    public JRadioButton Edition_CollectorRB;
+    public JLabel EditionL;
 
     public GameForm(String title) {
 
@@ -36,7 +39,16 @@ public class GameForm extends JFrame {
         TotalHoursTF.setName("Total Hours");
         GenreCB.getEditor().getEditorComponent().setName("Genre");
         ReleaseDateDP.getEditor().setName("Release Date");
+        Edition_NormalRB.setName("Normal Edition");
+        Edition_CollectorRB.setName("Collector Edition");
+
         ReleaseDateDP.getEditor().setEditable(false);
+
+        ButtonGroup editionButtons = new ButtonGroup();
+        editionButtons.add(Edition_NormalRB);
+        editionButtons.add(Edition_CollectorRB);
+        Edition_NormalRB.setSelected(true);
+        Edition_CollectorRB.setSelected(false);
 
         setColorJXDatePicker(ReleaseDateDP);
 

@@ -21,10 +21,21 @@ public class GameInfo extends JFrame {
     public JPanel mainP;
     public JLabel coverImage;
     public JButton purchasedB;
+    public JRadioButton editionNormalRB;
+    public JRadioButton editionCollectorRB;
+    public JLabel editionL;
+    private JLabel editionNormalL;
+    private JLabel editionCollectorL;
 
     public GameInfo(String title) {
 
         super(title);
+
+        ButtonGroup editionButtons = new ButtonGroup();
+        editionButtons.add(editionNormalRB);
+        editionButtons.add(editionCollectorRB);
+        editionNormalRB.setSelected(false);
+        editionCollectorRB.setSelected(false);
 
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setContentPane(mainP);

@@ -35,11 +35,12 @@ public class HomeController implements ActionListener {
         ListItemsViewer listItemsViewer = new ListItemsViewer("List Data");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        listItemsViewer.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+        listItemsViewer.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         ListItemsViewerController controller = new ListItemsViewerController(listItemsViewer, typeOfItemSelected);
         controller.loadTab();
 
+        listItemsViewer.setLocationRelativeTo(null);
         listItemsViewer.setVisible(true);
     }
 }

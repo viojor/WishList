@@ -120,11 +120,12 @@ public class ListItemsViewerController implements ChangeListener {
         GameForm gf = new GameForm("Add Game");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        gf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+        gf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         GameFormController controller = new GameFormController(gf);
         controller.setDefaultListModel(_defaultListItemsModel);
 
+        gf.setLocationRelativeTo(null);
         gf.setVisible(true);
     }
 
@@ -133,11 +134,12 @@ public class ListItemsViewerController implements ChangeListener {
         BookForm bf = new BookForm("Add Book");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        bf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+        bf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         BookFormController controller = new BookFormController(bf);
         controller.setDefaultListModel(_defaultListItemsModel);
 
+        bf.setLocationRelativeTo(null);
         bf.setVisible(true);
     }
 
@@ -146,11 +148,12 @@ public class ListItemsViewerController implements ChangeListener {
         GameInfo gi = new GameInfo("Game Info");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+        gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         GameInfoController gameInfoController = new GameInfoController(gi, idItemSelected);
         gameInfoController.setDefaultListModel(_defaultListItemsModel);
 
+        gi.setLocationRelativeTo(null);
         gi.setVisible(true);
     }
 
@@ -159,11 +162,12 @@ public class ListItemsViewerController implements ChangeListener {
         BookInfo bi = new BookInfo("Book Info");
 
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        bi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 2 / 3);
+        bi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         BookInfoController bookInfoController = new BookInfoController(bi, idItemSelected);
         bookInfoController.setDefaultListModel(_defaultListItemsModel);
 
+        bi.setLocationRelativeTo(null);
         bi.setVisible(true);
     }
 }

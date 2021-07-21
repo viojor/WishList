@@ -18,6 +18,8 @@ import java.util.Date;
 
 public class BookFormController implements ActionListener {
 
+    private static final String ERROR_BOOK_FORM_TITLE = "Error creating Book";
+
     private final BookForm _viewBookForm;
     private final BookDAO _bookDAO;
     private Book _bookModel;
@@ -60,7 +62,7 @@ public class BookFormController implements ActionListener {
                 String errorMsg = _formValidation.getFinalErrorMsg();
                 _formValidation.resetFinalErrorMsg();
 
-                JOptionPane.showMessageDialog(null, errorMsg);
+                JOptionPane.showMessageDialog(null, errorMsg, ERROR_BOOK_FORM_TITLE, JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == _viewBookForm.CoverB) {
 

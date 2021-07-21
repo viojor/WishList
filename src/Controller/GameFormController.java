@@ -20,6 +20,8 @@ import java.util.Date;
 
 public class GameFormController implements ActionListener {
 
+    private static final String ERROR_GAME_FORM_TITLE = "Error creating Game";
+
     private final GameForm _viewGameForm;
     private final GameDAO _gameDAO;
     private Game _gameModel;
@@ -69,7 +71,7 @@ public class GameFormController implements ActionListener {
                 String errorMsg = _formValidation.getFinalErrorMsg();
                 _formValidation.resetFinalErrorMsg();
 
-                JOptionPane.showMessageDialog(null, errorMsg);
+                JOptionPane.showMessageDialog(null, errorMsg, ERROR_GAME_FORM_TITLE, JOptionPane.ERROR_MESSAGE);
             }
         } else if (e.getSource() == _viewGameForm.CoverB) {
 
@@ -100,6 +102,7 @@ public class GameFormController implements ActionListener {
 
         String estimatedHours = _viewGameForm.EstimatedHoursTF.getText();
         String totalHours = _viewGameForm.TotalHoursTF.getText();
+        boolean isCollectorEdition = !_viewGameForm.Edition_NormalRB.isSelected();
         if(urlGameCover == null){
 
             urlGameCover = PurchasableItem.URL_IMAGE_NOT_AVAILABLE;
@@ -108,7 +111,7 @@ public class GameFormController implements ActionListener {
         String cover = urlGameCover;
 
         _gameModel = new Game(id, name, price, cover, PurchasableItem.ItemState.Pending.toString() ,gender,
-                releaseDateFormatDDMMYYYY, estimatedHours, totalHours);
+                releaseDateFormatDDMMYYYY, estimatedHours, totalHours, isCollectorEdition);
 
         addGameToDB();
     }

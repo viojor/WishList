@@ -33,7 +33,7 @@ public class GameDAO extends PurchasableItemDAO<Game> {
             Statement st = connection.createStatement();
             st.executeUpdate("CREATE TABLE " + GAMES_TABLE_NAME + " (id INT PRIMARY KEY auto_increment, cover VARCHAR(255)," +
                     " name VARCHAR(255), price VARCHAR(255), gender VARCHAR(255), release_date VARCHAR(255)," +
-                    " estimated_hours VARCHAR(255), total_hours VARCHAR(255), state VARCHAR(255))");
+                    " estimated_hours VARCHAR(255), total_hours VARCHAR(255), state VARCHAR(255), is_collector_edition BIT)");
 
             st.close();
             DBConnector.disconnectDB(connection);
@@ -58,9 +58,11 @@ public class GameDAO extends PurchasableItemDAO<Game> {
             String estimatedHours = newGame.getEstimatedHours();
             String totalHours = newGame.getTotalsHours();
             String state = newGame.getState();
+            boolean isCollectorEdition = newGame.isCollectorEdition();
 
             PreparedStatement preparedStatement = connection.prepareStatement("INSERT INTO " + GAMES_TABLE_NAME +
-                    " (cover, name, price, gender, release_date, estimated_hours, total_hours, state) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+                    " (cover, name, price, gender, release_date, estimated_hours, total_hours, state, is_collector_edition)" +
+                    " VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
             preparedStatement.setString(1, cover);
             preparedStatement.setString(2, name);
             preparedStatement.setString(3, price);
@@ -69,6 +71,7 @@ public class GameDAO extends PurchasableItemDAO<Game> {
             preparedStatement.setString(6, estimatedHours);
             preparedStatement.setString(7, totalHours);
             preparedStatement.setString(8, state);
+            preparedStatement.setBoolean(9, isCollectorEdition);
 
             preparedStatement.execute();
 
@@ -96,12 +99,14 @@ public class GameDAO extends PurchasableItemDAO<Game> {
             String estimatedHours = upgradedGame.getEstimatedHours();
             String totalHours = upgradedGame.getTotalsHours();
             String state = upgradedGame.getState();
+            boolean isCollectorEdition = upgradedGame.isCollectorEdition();
 
             Statement st = connection.createStatement();
             st.executeUpdate("UPDATE " + GAMES_TABLE_NAME +
                     " SET cover = '" + cover + "', name = '" + name + "', price = '" + price +
                     "', gender = '" + gender + "', release_date = '" + releaseDate + "', estimated_hours = '" +
-                    estimatedHours + "', total_hours = '" + totalHours + "', state = '" + state + "'" +
+                    estimatedHours + "', total_hours = '" + totalHours + "', state = '" + state +
+                    "', is_collector_edition = " + isCollectorEdition +
                     " WHERE id = " + id);
 
             st.close();
@@ -151,8 +156,9 @@ public class GameDAO extends PurchasableItemDAO<Game> {
                 String releaseDate = rs.getString("release_date");
                 String estimatedHours = rs.getString("estimated_hours");
                 String totalHours = rs.getString("total_hours");
+                boolean isCollectorEdition = rs.getBoolean("is_collector_edition");
 
-                Game gameSelected = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours);
+                Game gameSelected = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours, isCollectorEdition);
                 gameList.add(gameSelected);
             }
 
@@ -187,8 +193,9 @@ public class GameDAO extends PurchasableItemDAO<Game> {
                 String releaseDate = rs.getString("release_date");
                 String estimatedHours = rs.getString("estimated_hours");
                 String totalHours = rs.getString("total_hours");
+                boolean isCollectorEdition = rs.getBoolean("is_collector_edition");
 
-                gameWithId = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours);
+                gameWithId = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours, isCollectorEdition);
             }
 
             st.close();
