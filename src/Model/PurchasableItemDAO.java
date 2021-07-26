@@ -8,6 +8,8 @@ public abstract class PurchasableItemDAO<T> {
 
     public abstract void insert(T newElement);
 
+    public abstract void updatePriceWithId(String newPrice, int idElement);
+
     public abstract void update(T upgradedElement);
 
     public abstract void delete(int idElementRemove);

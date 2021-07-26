@@ -1,8 +1,10 @@
 package Controller;
 
+import MySQL.DBConnector;
 import View.Home;
 import View.ListItemsViewer;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,6 +39,11 @@ public class HomeController implements ActionListener {
         Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
         listItemsViewer.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
+        if(DBConnector.getConnection() == null){
+
+            JOptionPane.showMessageDialog(null, "Cant connect with the database. Look if MySQL service is running",
+                    "Cant connect with the database", JOptionPane.ERROR_MESSAGE);
+        }
         ListItemsViewerController controller = new ListItemsViewerController(listItemsViewer, typeOfItemSelected);
         controller.loadTab();
 

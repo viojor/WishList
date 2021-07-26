@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.regex.Pattern;
 
 public class GameInfoController implements ActionListener {
 
@@ -96,13 +97,37 @@ public class GameInfoController implements ActionListener {
 
             int defaultListModelElementIndex = _defaultListModel.indexOf(_gameModel);
 
-            _gameModel.setState(PurchasableItem.ItemState.Purchased.toString());
-            _gameDAO.updateState(_gameModel.getId());
+            String newPrice = (String) JOptionPane.showInputDialog(null,"Indicate purchase price",
+                    "Purchase game", JOptionPane.PLAIN_MESSAGE, null, null, "0");
 
-            //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
-            _defaultListModel.remove(defaultListModelElementIndex);
+            if(newPrice == null || newPrice.isEmpty()){ // Clicked close (x) or cancel button.
 
-            _gameInfoView.dispose();
+                showMessageDialog("The input field cant be empty", "Purchase game", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                if(Pattern.matches(Regex.WHITESPACE_REGEX, newPrice) || !Pattern.matches(Regex.ONLY_REAL_NUMBERS_REGEX,
+                        newPrice)){
+
+                    showMessageDialog("Only numeric values are accepted (i.e: 22.45)", "Purchase game",
+                            JOptionPane.ERROR_MESSAGE);
+                }
+                else{
+
+                    _gameModel.setState(PurchasableItem.ItemState.Purchased.toString());
+                    _gameDAO.updateState(_gameModel.getId());
+                    _gameDAO.updatePriceWithId(newPrice, _gameModel.getId());
+
+                    //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
+                    _defaultListModel.remove(defaultListModelElementIndex);
+
+                    _gameInfoView.dispose();
+                }
+            }
         }
+    }
+
+    private void showMessageDialog(String message, String title, int dialogType){
+
+        JOptionPane.showMessageDialog(null,message, title, dialogType);
     }
 }

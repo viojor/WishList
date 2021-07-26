@@ -84,6 +84,26 @@ public class GameDAO extends PurchasableItemDAO<Game> {
     }
 
     @Override
+    public void updatePriceWithId(String newPrice, int idElement){
+
+        try {
+
+            Connection connection = DBConnector.getConnection();
+
+            Statement st = connection.createStatement();
+            st.executeUpdate("UPDATE " + GAMES_TABLE_NAME +
+                    " SET price = '" + newPrice + "'"  +
+                    " WHERE id = " + idElement);
+
+            st.close();
+            DBConnector.disconnectDB(connection);
+        } catch (SQLException e) {
+
+            System.out.println("Error updating the price of an element from '" + GAMES_TABLE_NAME + "' using a given Id: " + e);
+        }
+    }
+
+    @Override
     public void update(Game upgradedGame) {
 
         try {
