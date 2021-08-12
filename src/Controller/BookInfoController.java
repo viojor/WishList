@@ -6,35 +6,22 @@ import View.BookInfo;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.util.regex.Pattern;
 
-public class BookInfoController implements ActionListener {
+public class BookInfoController {
 
     private final BookInfo _bookInfoView;
-    private final BookDAO _bookDAO;
     private final Book _bookModel;
-    private DefaultListModel<PurchasableItem> _defaultListModel;
 
     public BookInfoController(BookInfo bookInfoView, int idBookToShow) {
 
         _bookInfoView = bookInfoView;
-        _bookDAO = new BookDAO();
+        BookDAO _bookDAO = new BookDAO();
         _bookModel = _bookDAO.getById(idBookToShow);
 
-        _bookInfoView.purchasedB.addActionListener(this);
-
         setBookInfoIntoView();
-        setPurchasedButtonVisibility();
-    }
-
-    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
-
-        _defaultListModel = defaultListModel;
     }
 
     private void setBookInfoIntoView() {
@@ -64,65 +51,5 @@ public class BookInfoController implements ActionListener {
             _bookInfoView.coverImage.setIcon(new ImageIcon(new ImageIcon(coverImage).getImage()
                     .getScaledInstance(200, 250, Image.SCALE_SMOOTH)));
         }
-    }
-
-    private void setPurchasedButtonVisibility() {
-
-        if (_bookModel.getState().equals(PurchasableItem.ItemState.Purchased.toString())) {
-
-            _bookInfoView.purchasedB.setVisible(false);
-            _bookInfoView.purchasedB.setEnabled(false);
-        } else { //PurchasableItem.ItemState.Pending
-
-            _bookInfoView.purchasedB.setVisible(true);
-            _bookInfoView.purchasedB.setEnabled(true);
-        }
-    }
-
-    public void actionPerformed(ActionEvent e) {
-
-        if (e.getSource() == _bookInfoView.purchasedB) {
-
-            int defaultListModelElementIndex = _defaultListModel.indexOf(_bookModel);
-
-            /*_bookModel.setState(PurchasableItem.ItemState.Purchased.toString());
-            _bookDAO.updateState(_bookModel.getId());
-
-            //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
-            _defaultListModel.remove(defaultListModelElementIndex);
-
-            _bookInfoView.dispose();*/
-            String newPrice = (String) JOptionPane.showInputDialog(null,"Indicate purchase price",
-                    "Purchase book", JOptionPane.PLAIN_MESSAGE, null, null, "0");
-
-            if(newPrice == null || newPrice.isEmpty()){ // Clicked close (x) or cancel button.
-
-                showMessageDialog("The input field cant be empty", "Purchase book", JOptionPane.ERROR_MESSAGE);
-            }
-            else{
-                if(Pattern.matches(Regex.WHITESPACE_REGEX, newPrice) || !Pattern.matches(Regex.ONLY_REAL_NUMBERS_REGEX,
-                        newPrice)){
-
-                    showMessageDialog("Only numeric values are accepted (i.e: 22.45)", "Purchase book",
-                            JOptionPane.ERROR_MESSAGE);
-                }
-                else{
-
-                    _bookModel.setState(PurchasableItem.ItemState.Purchased.toString());
-                    _bookDAO.updateState(_bookModel.getId());
-                    _bookDAO.updatePriceWithId(newPrice, _bookModel.getId());
-
-                    //Remove the element from the list cause we are changing the attribute we use to get them (moved to other tab)
-                    _defaultListModel.remove(defaultListModelElementIndex);
-
-                    _bookInfoView.dispose();
-                }
-            }
-        }
-    }
-
-    private void showMessageDialog(String message, String title, int dialogType){
-
-        JOptionPane.showMessageDialog(null,message, title, dialogType);
     }
 }

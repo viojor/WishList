@@ -217,6 +217,44 @@ public class BookDAO extends PurchasableItemDAO<Book> {
         return bookWithId;
     }
 
+    public Book getByOrder(int orderItemList, String stateOfElement){
+
+        Book bookPositionIndicated = new Book();
+        try {
+
+            Connection connection = DBConnector.getConnection();
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM " + BOOKS_TABLE_NAME + " WHERE state='" + stateOfElement + "'");
+            int numItemsProcessed = 0;
+            while (rs.next()) {
+                if(numItemsProcessed == orderItemList){
+
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String price = rs.getString("price");
+                    String cover = rs.getString("cover");
+                    String state = rs.getString("state");
+                    String author = rs.getString("author");
+                    int pagesNumber = rs.getInt("pages_number");
+                    String ISBN = rs.getString("ISBN");
+                    String publicationDate = rs.getString("publication_date");
+
+                    bookPositionIndicated = new Book(id, name, price, cover, state, author, pagesNumber, ISBN, publicationDate);
+                }
+                numItemsProcessed++;
+            }
+
+            st.close();
+            rs.close();
+            DBConnector.disconnectDB(connection);
+        } catch (SQLException e) {
+
+            System.out.println("Error getting the book in the row " + orderItemList + " from '" + BOOKS_TABLE_NAME + "': " + e);
+        }
+        return bookPositionIndicated;
+    }
+
     @Override
     public int getCurrentMaxId() {
 

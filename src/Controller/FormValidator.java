@@ -3,11 +3,11 @@ package Controller;
 import javax.swing.*;
 import java.util.regex.Pattern;
 
-public class ItemFormValidation {
+public class FormValidator {
 
     private String final_error_msg;
 
-    public ItemFormValidation(){
+    public FormValidator(){
 
         final_error_msg = "";
     }

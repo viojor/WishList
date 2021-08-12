@@ -45,7 +45,7 @@ public class ListItemsViewerController implements ChangeListener {
 
     public void loadTab() {
 
-        if (_viewListItemsViewer.tabbedPanel.getSelectedIndex() != -1) {
+        /*if (_viewListItemsViewer.tabbedPanel.getSelectedIndex() != -1) {
 
             _defaultListItemsModel.clear();
             List<PurchasableItem> itemsList = getItemsList();
@@ -55,7 +55,7 @@ public class ListItemsViewerController implements ChangeListener {
             }
 
             JList<PurchasableItem> itemsJList = new JList<>(_defaultListItemsModel);
-            itemsJList.setCellRenderer(new ItemRenderer());
+            itemsJList.setCellRenderer(new TableItemRenderer());
             itemsJList.addMouseListener(new MouseListener() {
                 public void mouseClicked(MouseEvent e) {
                     if(_typeOfItemSelected.equals(BookDAO.BOOKS_TABLE_NAME)){
@@ -84,7 +84,7 @@ public class ListItemsViewerController implements ChangeListener {
             itemsJList.setBackground(new Color(156, 143, 231));
             JScrollPane jsp = (JScrollPane) _viewListItemsViewer.tabbedPanel.getSelectedComponent();
             jsp.setViewportView(itemsJList);
-        }
+        }*/
     }
 
     private List<PurchasableItem> getItemsList() {
@@ -123,7 +123,7 @@ public class ListItemsViewerController implements ChangeListener {
         gf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         GameFormController controller = new GameFormController(gf);
-        controller.setDefaultListModel(_defaultListItemsModel);
+        //controller.setDefaultListModel(_defaultListItemsModel);
 
         gf.setLocationRelativeTo(null);
         gf.setVisible(true);
@@ -137,7 +137,7 @@ public class ListItemsViewerController implements ChangeListener {
         bf.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         BookFormController controller = new BookFormController(bf);
-        controller.setDefaultListModel(_defaultListItemsModel);
+        //controller.setDefaultListModel(_defaultListItemsModel);
 
         bf.setLocationRelativeTo(null);
         bf.setVisible(true);
@@ -151,7 +151,7 @@ public class ListItemsViewerController implements ChangeListener {
         gi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         GameInfoController gameInfoController = new GameInfoController(gi, idItemSelected);
-        gameInfoController.setDefaultListModel(_defaultListItemsModel);
+        //gameInfoController.setDefaultListModel(_defaultListItemsModel);
 
         gi.setLocationRelativeTo(null);
         gi.setVisible(true);
@@ -165,7 +165,7 @@ public class ListItemsViewerController implements ChangeListener {
         bi.setSize((int) screenSize.getWidth() * 2 / 3, (int) screenSize.getHeight() * 3 / 4);
 
         BookInfoController bookInfoController = new BookInfoController(bi, idItemSelected);
-        bookInfoController.setDefaultListModel(_defaultListItemsModel);
+        //bookInfoController.setDefaultListModel(_defaultListItemsModel);
 
         bi.setLocationRelativeTo(null);
         bi.setVisible(true);

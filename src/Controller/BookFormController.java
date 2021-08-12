@@ -7,6 +7,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,6 +16,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 public class BookFormController implements ActionListener {
 
@@ -23,11 +25,11 @@ public class BookFormController implements ActionListener {
     private final BookForm _viewBookForm;
     private final BookDAO _bookDAO;
     private Book _bookModel;
-    private DefaultListModel<PurchasableItem> _defaultListBookModel;
+    private DefaultTableModel _defaultTableBookModel;
 
     private String urlBookCover;
 
-    private final ItemFormValidation _formValidation;
+    private final FormValidator _formValidation;
 
     public BookFormController(BookForm viewBookForm) {
 
@@ -37,12 +39,12 @@ public class BookFormController implements ActionListener {
         _viewBookForm.CreateB.addActionListener(this);
         _viewBookForm.CoverB.addActionListener(this);
 
-        _formValidation = new ItemFormValidation();
+        _formValidation = new FormValidator();
     }
 
-    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
+    public void setDefaultListModel(DefaultTableModel defaultTableModel){
 
-        _defaultListBookModel = defaultListModel;
+        _defaultTableBookModel = defaultTableModel;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -54,7 +56,11 @@ public class BookFormController implements ActionListener {
                     && _formValidation.isFieldNumericInteger(_viewBookForm.PagesNumberTF) & _formValidation.isFieldNumericReal(_viewBookForm.PriceTF)){
 
                 createBookWithInputs();
-                _defaultListBookModel.addElement(_bookModel);
+
+                Vector<PurchasableItem> itemDataArray = new Vector<>(1);
+                itemDataArray.add(_bookModel);
+                _defaultTableBookModel.addRow(itemDataArray);
+
                 _viewBookForm.dispose();
             }
             else{

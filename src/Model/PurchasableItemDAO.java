@@ -18,6 +18,8 @@ public abstract class PurchasableItemDAO<T> {
 
     public abstract T getById(int elementId);
 
+    public abstract T getByOrder(int orderItemList, String stateOfElement);
+
     public abstract int getCurrentMaxId();
 
     public abstract void updateState(int elementId);

@@ -20,7 +20,6 @@ public class BookInfo extends JFrame {
     public JLabel pagesNumberValueL;
     public JLabel isbnL;
     public JLabel isbnValueL;
-    public JButton purchasedB;
 
     public BookInfo(String title) {
 

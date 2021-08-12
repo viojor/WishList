@@ -9,6 +9,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Vector;
 
 public class GameFormController implements ActionListener {
 
@@ -25,12 +27,12 @@ public class GameFormController implements ActionListener {
     private final GameForm _viewGameForm;
     private final GameDAO _gameDAO;
     private Game _gameModel;
-    private DefaultListModel<PurchasableItem> _defaultListGameModel;
+    private DefaultTableModel _defaultTableGameModel;
 
     private String genreSelected;
     private String urlGameCover;
 
-    private final ItemFormValidation _formValidation;
+    private final FormValidator _formValidation;
 
     public GameFormController(GameForm viewGameForm) {
 
@@ -44,12 +46,12 @@ public class GameFormController implements ActionListener {
         _viewGameForm.GenreCB.setModel(genresGamesDefaultModel);
         _viewGameForm.GenreCB.addActionListener(this);
 
-        _formValidation = new ItemFormValidation();
+        _formValidation = new FormValidator();
     }
 
-    public void setDefaultListModel(DefaultListModel<PurchasableItem> defaultListModel){
+    public void setDefaultListModel(DefaultTableModel defaultTableModel){
 
-        _defaultListGameModel = defaultListModel;
+        _defaultTableGameModel = defaultTableModel;
     }
 
     public void actionPerformed(ActionEvent e) {
@@ -63,7 +65,11 @@ public class GameFormController implements ActionListener {
                     _formValidation.isFieldNumericReal(_viewGameForm.PriceTF)){
 
                 createGameWithInputs();
-                _defaultListGameModel.addElement(_gameModel);
+
+                Vector<PurchasableItem> itemDataArray = new Vector<>(1);
+                itemDataArray.add(_gameModel);
+                _defaultTableGameModel.addRow(itemDataArray);
+
                 _viewGameForm.dispose();
             }
             else{

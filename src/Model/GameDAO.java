@@ -228,6 +228,45 @@ public class GameDAO extends PurchasableItemDAO<Game> {
         return gameWithId;
     }
 
+    public Game getByOrder(int orderItemList, String stateOfElement){
+
+        Game gamePositionIndicated = new Game();
+        try {
+
+            Connection connection = DBConnector.getConnection();
+
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM " + GAMES_TABLE_NAME + " WHERE state='" + stateOfElement + "'");
+            int numItemsProcessed = 0;
+            while (rs.next()) {
+                if(numItemsProcessed == orderItemList){
+
+                    int id = rs.getInt("id");
+                    String name = rs.getString("name");
+                    String price = rs.getString("price");
+                    String cover = rs.getString("cover");
+                    String state = rs.getString("state");
+                    String gender = rs.getString("gender");
+                    String releaseDate = rs.getString("release_date");
+                    String estimatedHours = rs.getString("estimated_hours");
+                    String totalHours = rs.getString("total_hours");
+                    boolean isCollectorEdition = rs.getBoolean("is_collector_edition");
+
+                    gamePositionIndicated = new Game(id, name, price, cover, state, gender, releaseDate, estimatedHours, totalHours, isCollectorEdition);
+                }
+                numItemsProcessed++;
+            }
+
+            st.close();
+            rs.close();
+            DBConnector.disconnectDB(connection);
+        } catch (SQLException e) {
+
+            System.out.println("Error getting the game in the row " + orderItemList + " from '" + GAMES_TABLE_NAME + "': " + e);
+        }
+        return gamePositionIndicated;
+    }
+
     public int getCurrentMaxId() {
 
         int maxId = 0;
