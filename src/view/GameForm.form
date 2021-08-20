@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.GameForm">
+  <grid id="27dc6" binding="MainP" layout-manager="GridLayoutManager" row-count="3" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-11781196"/>
+      <font name="Comic Sans MS" size="14" style="0"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <grid id="166b8" binding="GameDataP" layout-manager="GridLayoutManager" row-count="7" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-9873973"/>
+          <font name="Comic Sans MS" size="14" style="0"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="458ac" class="javax.swing.JTextField" binding="NameTF">
+            <constraints>
+              <grid row="0" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="404f2" class="javax.swing.JTextField" binding="PriceTF">
+            <constraints>
+              <grid row="3" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="a741b" class="javax.swing.JLabel" binding="NameL">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <labelFor value="458ac"/>
+              <text resource-bundle="Strings" key="name"/>
+            </properties>
+          </component>
+          <component id="88a8b" class="javax.swing.JLabel" binding="GenreL">
+            <constraints>
+              <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <labelFor value="fd7ab"/>
+              <text resource-bundle="Strings" key="gender"/>
+            </properties>
+          </component>
+          <component id="17da4" class="javax.swing.JLabel" binding="PriceL">
+            <constraints>
+              <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <labelFor value="404f2"/>
+              <text resource-bundle="Strings" key="price"/>
+            </properties>
+          </component>
+          <component id="d6cf9" class="javax.swing.JLabel" binding="ReleaseDateL">
+            <constraints>
+              <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <text resource-bundle="Strings" key="release.date"/>
+            </properties>
+          </component>
+          <component id="e251f" class="javax.swing.JLabel" binding="EstimatedHoursL">
+            <constraints>
+              <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <labelFor value="de0b6"/>
+              <text resource-bundle="Strings" key="estimated.hours"/>
+            </properties>
+          </component>
+          <component id="61af2" class="javax.swing.JLabel" binding="TotalHoursL">
+            <constraints>
+              <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <labelFor value="8c5c7"/>
+              <text resource-bundle="Strings" key="total.hours"/>
+            </properties>
+          </component>
+          <component id="de0b6" class="javax.swing.JTextField" binding="EstimatedHoursTF">
+            <constraints>
+              <grid row="5" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="8c5c7" class="javax.swing.JTextField" binding="TotalHoursTF">
+            <constraints>
+              <grid row="6" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+                <preferred-size width="150" height="-1"/>
+              </grid>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <editable value="true"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="fd7ab" class="javax.swing.JComboBox" binding="GenreCB">
+            <constraints>
+              <grid row="2" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="2" anchor="8" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="a5631" class="org.jdesktop.swingx.JXDatePicker" binding="ReleaseDateDP">
+            <constraints>
+              <grid row="4" column="1" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <editable value="true"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+          </component>
+          <component id="bbbb2" class="javax.swing.JRadioButton" binding="Edition_NormalRB">
+            <constraints>
+              <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-9873973"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <text resource-bundle="Strings" key="normal"/>
+            </properties>
+          </component>
+          <component id="4d592" class="javax.swing.JRadioButton" binding="Edition_CollectorRB">
+            <constraints>
+              <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-9873973"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <text resource-bundle="Strings" key="collector"/>
+            </properties>
+          </component>
+          <component id="9479e" class="javax.swing.JLabel" binding="EditionL">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <text resource-bundle="Strings" key="edition"/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <grid id="43326" binding="CoverP" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+        <margin top="0" left="0" bottom="0" right="0"/>
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="82" height="123"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-9873973"/>
+          <font name="Comic Sans MS" size="14" style="0"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <component id="7da0" class="javax.swing.JButton" binding="CoverB">
+            <constraints>
+              <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <foreground color="-1"/>
+              <text resource-bundle="Strings" key="image"/>
+            </properties>
+          </component>
+          <component id="a5838" class="javax.swing.JLabel" binding="CoverImage">
+            <constraints>
+              <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <font name="Comic Sans MS" size="16" style="0"/>
+              <text value=""/>
+            </properties>
+          </component>
+        </children>
+      </grid>
+      <component id="78d7a" class="javax.swing.JButton" binding="CreateB">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-6516761"/>
+          <font name="Comic Sans MS" size="16" style="0"/>
+          <foreground color="-1"/>
+          <text resource-bundle="Strings" key="create"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

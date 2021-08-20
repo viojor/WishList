@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="view.TableItemsViewer">
+  <grid id="27dc6" binding="mainP" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="400"/>
+    </constraints>
+    <properties>
+      <background color="-11781196"/>
+      <foreground color="-11781196"/>
+    </properties>
+    <border type="none"/>
+    <children>
+      <tabbedpane id="fa087" binding="tabbedPanel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="200" height="200"/>
+          </grid>
+        </constraints>
+        <properties>
+          <background color="-9873973"/>
+          <font name="Comic Sans MS" size="14" style="0"/>
+          <foreground color="-1"/>
+        </properties>
+        <border type="none"/>
+        <children>
+          <scrollpane id="d739c" binding="pendingTab">
+            <constraints>
+              <tabbedpane title-resource-bundle="Strings" title-key="pendingTab"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="14" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="b9431" class="javax.swing.JTable" binding="tablePendingItems">
+                <constraints/>
+                <properties>
+                  <autoCreateRowSorter value="false"/>
+                  <autoResizeMode value="4"/>
+                  <background color="-9873973"/>
+                  <enabled value="true"/>
+                  <fillsViewportHeight value="true"/>
+                  <focusable value="false"/>
+                  <font name="Comic Sans MS" size="16" style="0"/>
+                  <foreground color="-1"/>
+                  <gridColor color="-1"/>
+                  <rowSelectionAllowed value="false"/>
+                  <selectionBackground color="-9873973"/>
+                  <selectionForeground color="-1"/>
+                  <showHorizontalLines value="true"/>
+                  <showVerticalLines value="false"/>
+                </properties>
+                <clientProperties>
+                  <Table.isFileList class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+              </component>
+            </children>
+          </scrollpane>
+          <scrollpane id="db713" binding="purchasedTab">
+            <constraints>
+              <tabbedpane title-resource-bundle="Strings" title-key="purchasedTab"/>
+            </constraints>
+            <properties>
+              <background color="-6516761"/>
+              <font name="Comic Sans MS" size="14" style="0"/>
+              <foreground color="-1"/>
+            </properties>
+            <border type="none"/>
+            <children>
+              <component id="98ad6" class="javax.swing.JTable" binding="tablePurchasedItems">
+                <constraints/>
+                <properties>
+                  <autoCreateRowSorter value="false"/>
+                  <autoResizeMode value="4"/>
+                  <background color="-9873973"/>
+                  <enabled value="true"/>
+                  <fillsViewportHeight value="true"/>
+                  <focusable value="false"/>
+                  <font name="Comic Sans MS" size="16" style="0"/>
+                  <foreground color="-1"/>
+                  <gridColor color="-1"/>
+                  <rowSelectionAllowed value="false"/>
+                  <selectionBackground color="-9873973"/>
+                  <selectionForeground color="-1"/>
+                  <showHorizontalLines value="true"/>
+                  <showVerticalLines value="false"/>
+                </properties>
+                <clientProperties>
+                  <Table.isFileList class="java.lang.Boolean" value="false"/>
+                </clientProperties>
+              </component>
+            </children>
+          </scrollpane>
+        </children>
+      </tabbedpane>
+      <component id="69f0e" class="javax.swing.JButton" binding="addItemB">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-6516761"/>
+          <enabled value="true"/>
+          <font name="Comic Sans MS" size="14" style="0"/>
+          <foreground color="-1"/>
+          <text resource-bundle="Strings" key="add.game"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+  <inspectionSuppressions>
+    <suppress inspection="NoLabelFor"/>
+    <suppress inspection="MissingMnemonic" id="69f0e"/>
+  </inspectionSuppressions>
+</form>
